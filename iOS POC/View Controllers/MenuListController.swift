@@ -73,7 +73,9 @@ class MenuListController: UITableViewController {
                         guard let `self` = self else { return }
                 
                         if (success) {
+                            self.dismiss(animated: true, completion: nil)
                             print("success")
+                            self.showToast(message: "You have successfully logged out!", font: .systemFont(ofSize: 12.0))
                         }
 //        User was sucessfully logged Out.
                     }

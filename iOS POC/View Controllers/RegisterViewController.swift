@@ -82,19 +82,21 @@ class RegisterViewController: UIViewController {
                 message = "There was an error."
             }
             let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-//                UIAlertAction in
-//                NSLog("OK Pressed")
-//            }
-//            alertController.addAction(okAction)
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                UIAlertAction in
+                NSLog("OK Pressed")
+                self.backToLoginPage()
+                
+            }
+            alertController.addAction(okAction)
+//            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
 
     }
     
     @IBAction func didTapBackButton(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        backToLoginPage()
     }
     
     
@@ -114,6 +116,10 @@ class RegisterViewController: UIViewController {
         emailErrorText.isHidden = true
         passwordErrorText.isHidden = true
         
+    }
+    
+    func backToLoginPage() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -121,13 +121,14 @@
                                     <constraint firstItem="03t-Ej-PgC" firstAttribute="leading" secondItem="Hps-fJ-veu" secondAttribute="leading" constant="20" id="ssu-n3-YVJ"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D2c-xz-OP9" userLabel="loader view">
+                            <view hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D2c-xz-OP9" userLabel="loader view">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="tm6-Wk-N2y">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="tm6-Wk-N2y">
                                         <rect key="frame" x="188.5" y="368.5" width="37" height="37"/>
                                     </activityIndicatorView>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="tm6-Wk-N2y" firstAttribute="centerX" secondItem="D2c-xz-OP9" secondAttribute="centerX" id="GtS-JY-Fdz"/>
                                     <constraint firstItem="tm6-Wk-N2y" firstAttribute="centerY" secondItem="D2c-xz-OP9" secondAttribute="centerY" id="laN-RH-xkE"/>
@@ -151,6 +152,7 @@
                     <connections>
                         <outlet property="emailErrorText" destination="NZE-t2-K5v" id="Bo3-a4-qsI"/>
                         <outlet property="emailTextField" destination="rSQ-VD-Uv4" id="ZCz-31-ir5"/>
+                        <outlet property="loaderView" destination="D2c-xz-OP9" id="UCF-Vg-mBK"/>
                         <outlet property="passwordErrorText" destination="sAz-OG-nUR" id="Rp6-rV-PD7"/>
                         <outlet property="passwordTextField" destination="Hwu-OT-M7t" id="x6w-XO-6cH"/>
                         <segue destination="Qgh-oV-BRN" kind="presentation" identifier="registerSegue" id="6gM-f8-kj9"/>
@@ -255,7 +257,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="8sN-w1-K7R"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password cannot be empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZA9-c3-1Bf" userLabel="passwordErrorText">
                                                 <rect key="frame" x="20" y="723.5" width="374" height="13.5"/>
@@ -411,7 +413,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LGN-ad-LEt"/>
+        <segue reference="IBR-De-bdO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>

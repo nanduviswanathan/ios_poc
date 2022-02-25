@@ -12,6 +12,8 @@ import UIKit
 
 class AuthViewModel{
     
+    // register new user
+    
     func createUser(photo: UIImage,firstName:String, lastName:String?,age:Int, email: String, password: String,  completionBlock: @escaping (_ success: Bool) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
             
@@ -38,6 +40,7 @@ class AuthViewModel{
     }
 }
     
+    // sign in with email and password
     func signIn(email: String, pass: String, completionBlock: @escaping (_ success: Bool, _ msg: String) -> Void) {
         print("data here " + email + pass )
         Auth.auth().signIn(withEmail: email, password: pass) { (result, error) in
@@ -74,10 +77,12 @@ class AuthViewModel{
     }
     
     
+    // sign out current user
     func signOutUser(completionBlock: @escaping (_ success: Bool) -> Void){
         let firebaseAuth = Auth.auth()
     do {
       try firebaseAuth.signOut()
+
         completionBlock(true)
     } catch let signOutError as NSError {
       print("Error signing out: %@", signOutError)

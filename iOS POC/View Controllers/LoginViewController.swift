@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var passwordErrorText: UILabel!
     
+    @IBOutlet weak var loaderView: UIView!
+    
     var authVM: AuthViewModel?
     
     override func viewDidLoad() {
@@ -26,6 +28,7 @@ class LoginViewController: UIViewController {
         authVM = AuthViewModel()
         
         passwordTextField.textContentType = .oneTimeCode
+        loaderView.isHidden = true
         
         print("App started");
 //        emailTextField.addTarget(self, action: #selector(checkAndDisplayEmailError(emailTextField:)), for: .editingChanged)
@@ -49,21 +52,25 @@ class LoginViewController: UIViewController {
             }
         
         print("wanna continue")
+        self.loaderView.isHidden = false
            authVM?.signIn(email: emailAddress, pass: password) {[weak self] (success,msg) in
                guard let `self` = self else { return }
                var message: String = ""
                if (success) {
+                   self.loaderView.isHidden = true
                    let homeViewController = self.storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
                    
                    self.view.window?.rootViewController = homeViewController
                    self.view.window?.makeKeyAndVisible()
                    
                } else {
+                   self.loaderView.isHidden = true
                    message = msg
                    let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                    self.present(alertController, animated: true, completion: nil)
                }
+              
 
            }
         
