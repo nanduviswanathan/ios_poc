@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
         
         print("wanna continue")
         self.loaderView.isHidden = false
-           authVM?.signIn(email: emailAddress, pass: password) {[weak self] (success,msg) in
+           authVM?.logIn(email: emailAddress, pass: password) {[weak self] (success,msg) in
                guard let `self` = self else { return }
                var message: String = ""
                if (success) {

@@ -73,7 +73,7 @@ class RegisterViewController: UIViewController {
         }
         
         
-        authVM?.createUser(photo:(imageView?.image)! ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
+        authVM?.registerUser(photo:(imageView?.image)! ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
             guard let `self` = self else { return }
             var message: String = ""
             if (success) {
@@ -100,10 +100,9 @@ class RegisterViewController: UIViewController {
     }
     
     
-    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
+       // let tappedImage = tapGestureRecognizer.view as! UIImageView
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil )
@@ -136,3 +135,8 @@ extension RegisterViewController: UIImagePickerControllerDelegate ,  UINavigatio
 }
 
 
+//let storyBoard: UIStoryboard = UIStoryboard(name: "HTMLRenderPage", bundle: nil)
+//        let newViewController = storyBoard.instantiateViewController(withIdentifier: "HTMLRenderPage") as! HTMLRenderPageViewController
+//        newViewController.privacyPolicy = false
+//        newViewController.modalPresentationStyle = .fullScreen
+//        self.present(newViewController, animated: false, completion: nil)

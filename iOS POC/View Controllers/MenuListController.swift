@@ -42,6 +42,7 @@ class MenuListController: UITableViewController {
 
         case 1:
             print("location")
+            showToast(message: "sample is herbdkfhagsdfgadsjfghdsafgldsfdsf", font: .systemFont(ofSize: 12.0))
 
         case 2:
             print("Nearby")
@@ -69,15 +70,16 @@ class MenuListController: UITableViewController {
     }
     
     func logout(){
-        AuthViewModel().signOutUser(){[weak self] (success) in
+        AuthViewModel().logOutUser(){[weak self] (success) in
                         guard let `self` = self else { return }
                 
                         if (success) {
-                            self.dismiss(animated: true, completion: nil)
                             print("success")
-                            self.showToast(message: "You have successfully logged out!", font: .systemFont(ofSize: 12.0))
+                            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+                                    newViewController.modalPresentationStyle = .fullScreen
+                                    self.present(newViewController, animated: false, completion: nil)
                         }
-//        User was sucessfully logged Out.
                     }
     }
     

@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="Login View Controller" customClass="LoginViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginVC" id="BYZ-38-t0r" userLabel="Login View Controller" customClass="LoginViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -168,11 +168,11 @@
             <objects>
                 <viewController id="Qgh-oV-BRN" userLabel="Sign Up View Controller" customClass="RegisterViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZhH-As-wsf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="892"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7Y-G7-KNw">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="809"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3d-Yq-SPC">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="850"/>
@@ -339,7 +339,7 @@
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <size key="freeformSize" width="414" height="946"/>
+                    <size key="freeformSize" width="414" height="892"/>
                     <connections>
                         <outlet property="ageErrorText" destination="gaJ-oc-xRI" id="JKj-cU-y7W"/>
                         <outlet property="ageTextField" destination="TMy-v5-l0f" id="xGK-it-0V7"/>
@@ -356,7 +356,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VgM-MN-Vc0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1086.9565217391305" y="56.919642857142854"/>
+            <point key="canvasLocation" x="1086" y="55"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="OJ3-XN-jEw">
@@ -396,7 +396,7 @@
         <!--Navigation Controller-->
         <scene sceneID="gZm-Rh-pU0">
             <objects>
-                <navigationController storyboardIdentifier="LoginVC" automaticallyAdjustsScrollViewInsets="NO" id="E0o-pp-Xiu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="E0o-pp-Xiu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="axr-9t-B9r">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
