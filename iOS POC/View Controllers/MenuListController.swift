@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class MenuListController: UITableViewController {
     var items = ["Profile","Location", "NearBy", "Logout"]
@@ -39,6 +40,7 @@ class MenuListController: UITableViewController {
         switch (indexPath.row) {
         case 0:
             print("profile")
+            print("pro pic -\(Auth.auth().currentUser?.photoURL) -- email - \(Auth.auth().currentUser?.email)--displayname - \(Auth.auth().currentUser?.displayName) ");
 
         case 1:
             print("location")

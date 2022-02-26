@@ -22,6 +22,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var ageErrorText: UILabel!
     @IBOutlet weak var emailErrorText: UILabel!
     @IBOutlet weak var passwordErrorText: UILabel!
+    @IBOutlet weak var profileErrorText: UILabel!
     
     var authVM: AuthViewModel?
     
@@ -50,9 +51,15 @@ class RegisterViewController: UIViewController {
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
         print("Register tapped")
         setUpUI()
-        guard let firstName = firstNameTextField.text , let lastName = lastNameTextField.text,let age = ageTextField.text,let emailAddress = emailTextField.text, let password = passwordTextField.text else {
+        guard let dp = imageView.image, let firstName = firstNameTextField.text , let lastName = lastNameTextField.text,let age = ageTextField.text,let emailAddress = emailTextField.text, let password = passwordTextField.text else {
                 return
             }
+        
+        print("dp is -\(dp)")
+        if(dp == UIImage(systemName: "person.fill")){
+            profileErrorText.isHidden = false
+            return
+        }
         if(firstName.isEmpty) {
             firstNameErrorText.isHidden = false
             return
@@ -73,7 +80,7 @@ class RegisterViewController: UIViewController {
         }
         
         
-        authVM?.registerUser(photo:(imageView?.image)! ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
+        authVM?.registerUser(photo:dp ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
             guard let `self` = self else { return }
             var message: String = ""
             if (success) {
@@ -85,8 +92,8 @@ class RegisterViewController: UIViewController {
             let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                 UIAlertAction in
                 NSLog("OK Pressed")
-                self.backToLoginPage()
-                
+//                self.backToLoginPage()
+
             }
             alertController.addAction(okAction)
 //            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -110,6 +117,7 @@ class RegisterViewController: UIViewController {
     
     
     func setUpUI() {
+        profileErrorText.isHidden = true
         firstNameErrorText.isHidden = true
         ageErrorText.isHidden = true
         emailErrorText.isHidden = true

@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 class FirebasManger {
     
@@ -25,13 +26,50 @@ class FirebasManger {
                 // User was created successfully, now store the first name and last name
                 let db = Firestore.firestore()
                 
-                db.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName ?? "", "age":age , "uid": result!.user.uid ]) { (error) in
-                    
-                    if error != nil {
-                        // Show error message
-                        print("error saving user data")
-                    }
+             
+                
+                guard let uid = result?.user.uid else { return }
+                let imageName = UUID().uuidString
+                let storageRef = Storage.storage().reference().child("users").child("\(uid)").child("\(imageName).jpg")
+
+
+                if let uploadData = photo.jpegData(compressionQuality: 0.1) {
+                    storageRef.putData(uploadData, metadata: nil, completion: { (_, error) in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        storageRef.downloadURL(completion: { (url, error) in
+                            if let error = error {
+                                print(error)
+                                return
+                            }
+                            guard let photoUrl = url else { return }
+                            
+                            print("photo url is -\(photoUrl)")
+                            
+                                db.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName ?? "", "age":age , "uid": uid ]) { (error) in
+                                
+                                if error != nil {
+                                    // Show error message
+                                    print("error saving user data")
+                                }
+                                
+                                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                                changeRequest?.photoURL = photoUrl
+                                changeRequest?.commitChanges { error in
+                                    if let error = error {
+                                        print(error)
+                                        return
+                                    }
+                                }
+                            }
+                            
+
+                        })
+                    })
                 }
+                
                 completionBlock(true)
             }
         

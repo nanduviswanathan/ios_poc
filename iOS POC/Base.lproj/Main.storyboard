@@ -277,12 +277,19 @@
                                                     <action selector="didTapRegisterButton:" destination="Qgh-oV-BRN" eventType="touchUpInside" id="8aa-Ef-Bsg"/>
                                                 </connections>
                                             </button>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Choose a profile photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmV-tL-bV9" userLabel="profileErrorText">
+                                                <rect key="frame" x="128.5" y="315" width="157" height="13.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="NwP-Sg-Nn3" firstAttribute="leading" secondItem="X3d-Yq-SPC" secondAttribute="leading" constant="20" id="0xO-MM-4fk"/>
                                             <constraint firstItem="NVC-uy-n4p" firstAttribute="top" secondItem="NwP-Sg-Nn3" secondAttribute="bottom" constant="30" id="1Hy-3g-xpG"/>
                                             <constraint firstAttribute="trailing" secondItem="xpT-Y7-1Rk" secondAttribute="trailing" constant="20" id="1QN-wj-jqE"/>
                                             <constraint firstItem="Ixu-Ti-g0F" firstAttribute="top" secondItem="X3d-Yq-SPC" secondAttribute="top" constant="50" id="2yz-Um-wqT"/>
+                                            <constraint firstItem="YmV-tL-bV9" firstAttribute="top" secondItem="mIT-Lu-6oR" secondAttribute="bottom" constant="10" id="3Qe-0U-HNr"/>
                                             <constraint firstAttribute="trailing" secondItem="iCk-X9-U89" secondAttribute="trailing" constant="20" id="5CU-YA-SBD"/>
                                             <constraint firstItem="NwP-Sg-Nn3" firstAttribute="top" secondItem="Cid-ZJ-bZT" secondAttribute="bottom" constant="30" id="5oO-ib-jV7"/>
                                             <constraint firstItem="NVC-uy-n4p" firstAttribute="leading" secondItem="X3d-Yq-SPC" secondAttribute="leading" constant="20" id="8uf-bv-QHj"/>
@@ -294,6 +301,7 @@
                                             <constraint firstItem="ZA9-c3-1Bf" firstAttribute="leading" secondItem="X3d-Yq-SPC" secondAttribute="leading" constant="20" id="Ep8-hG-uhA"/>
                                             <constraint firstItem="iCk-X9-U89" firstAttribute="leading" secondItem="X3d-Yq-SPC" secondAttribute="leading" constant="20" id="F0C-N7-Sox"/>
                                             <constraint firstItem="NVC-uy-n4p" firstAttribute="top" secondItem="ZA9-c3-1Bf" secondAttribute="bottom" constant="8" symbolic="YES" id="Fjc-Vr-EEw"/>
+                                            <constraint firstItem="YmV-tL-bV9" firstAttribute="centerX" secondItem="X3d-Yq-SPC" secondAttribute="centerX" id="I0Y-vP-Nw5"/>
                                             <constraint firstItem="AcW-bt-t7e" firstAttribute="top" secondItem="X3d-Yq-SPC" secondAttribute="top" constant="10" id="Mb7-4y-k83"/>
                                             <constraint firstItem="iCk-X9-U89" firstAttribute="top" secondItem="Yiv-QH-OVk" secondAttribute="bottom" constant="30" id="OCx-YL-AsF"/>
                                             <constraint firstItem="xpT-Y7-1Rk" firstAttribute="centerX" secondItem="X3d-Yq-SPC" secondAttribute="centerX" id="OUh-c8-kkj"/>
@@ -351,6 +359,7 @@
                         <outlet property="lastNameTextField" destination="iCk-X9-U89" id="z9H-2W-i0F"/>
                         <outlet property="passwordErrorText" destination="ZA9-c3-1Bf" id="GmT-En-gra"/>
                         <outlet property="passwordTextField" destination="NwP-Sg-Nn3" id="hgQ-lE-oHE"/>
+                        <outlet property="profileErrorText" destination="YmV-tL-bV9" id="8H1-6I-tAU"/>
                         <segue destination="oTv-WO-ODJ" kind="presentation" identifier="registerToHomeScreenSegue" id="LGN-ad-LEt"/>
                     </connections>
                 </viewController>
@@ -413,7 +422,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="IBR-De-bdO"/>
+        <segue reference="LGN-ad-LEt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
