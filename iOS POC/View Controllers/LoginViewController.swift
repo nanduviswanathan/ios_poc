@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         clearErrorText()
         authVM = AuthViewModel()
-        
+            
         passwordTextField.textContentType = .oneTimeCode
         loaderView.isHidden = true
         
