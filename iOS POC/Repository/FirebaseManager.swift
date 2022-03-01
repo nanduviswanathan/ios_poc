@@ -124,4 +124,38 @@ class FirebasManger {
         completionBlock(false)
     }
     }
+    
+//
+      
+    func getUserData( completionBlock: @escaping (_ success: Bool, _ data: UserData?) -> Void) {
+        let docRef = Firestore.firestore()
+                    .collection("users")
+                    .whereField("uid", isEqualTo: Auth.auth().currentUser?.uid ?? "")
+
+                 // Get data
+                 docRef.getDocuments { (querySnapshot, err) in
+                     if let err = err {
+                         print(err.localizedDescription)
+                         completionBlock(false,nil)
+                     } else if querySnapshot!.documents.count != 1 {
+                         print("More than one document or none")
+                         completionBlock(false,nil)
+                     } else {
+                         let document = querySnapshot!.documents.first
+                         let dataDescription = document?.data()
+//
+//                         guard let firstname = dataDescription?["firstname"] else { return }
+//                         print(firstname)
+//                         print("data is  => \(dataDescription)")
+                         let jsonData = try! JSONSerialization.data(withJSONObject: dataDescription)
+                         let userData = try? JSONDecoder().decode(UserData.self, from: jsonData)
+                         completionBlock(true,userData)
+                     }
+                 }
+    }
+    
+    func emailAndProfilePic() -> (email: String?, pic: URL?){
+        let firebaseUser = Auth.auth().currentUser
+        return (firebaseUser?.email,firebaseUser?.photoURL)
+    }
 }

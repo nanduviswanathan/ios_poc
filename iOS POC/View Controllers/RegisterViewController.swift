@@ -24,6 +24,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordErrorText: UILabel!
     @IBOutlet weak var profileErrorText: UILabel!
     
+    @IBOutlet weak var loaderView: UIView!
+    
     var authVM: AuthViewModel?
     
     var imagePicker = UIImagePickerController()
@@ -34,6 +36,7 @@ class RegisterViewController: UIViewController {
         
         authVM = AuthViewModel()
         imagePicker.delegate = self
+        loaderView.isHidden = true
         
         imageView.layer.borderWidth = 1
         imageView.layer.masksToBounds = false
@@ -50,12 +53,12 @@ class RegisterViewController: UIViewController {
 
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
         print("Register tapped")
+       
         setUpUI()
         guard let dp = imageView.image, let firstName = firstNameTextField.text , let lastName = lastNameTextField.text,let age = ageTextField.text,let emailAddress = emailTextField.text, let password = passwordTextField.text else {
                 return
             }
         
-        print("dp is -\(dp)")
         if(dp == UIImage(systemName: "person.fill")){
             profileErrorText.isHidden = false
             return
@@ -80,6 +83,7 @@ class RegisterViewController: UIViewController {
         }
         
         
+        loaderView.isHidden = false
         authVM?.registerUser(photo:dp ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
             guard let `self` = self else { return }
             var message: String = ""
@@ -88,11 +92,13 @@ class RegisterViewController: UIViewController {
             } else {
                 message = "There was an error."
             }
+            
+            self.loaderView.isHidden = true
             let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                 UIAlertAction in
                 NSLog("OK Pressed")
-//                self.backToLoginPage()
+                self.backToLoginPage()
 
             }
             alertController.addAction(okAction)
@@ -141,10 +147,3 @@ extension RegisterViewController: UIImagePickerControllerDelegate ,  UINavigatio
         dismiss(animated: true)
     }
 }
-
-
-//let storyBoard: UIStoryboard = UIStoryboard(name: "HTMLRenderPage", bundle: nil)
-//        let newViewController = storyBoard.instantiateViewController(withIdentifier: "HTMLRenderPage") as! HTMLRenderPageViewController
-//        newViewController.privacyPolicy = false
-//        newViewController.modalPresentationStyle = .fullScreen
-//        self.present(newViewController, animated: false, completion: nil)

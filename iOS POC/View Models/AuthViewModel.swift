@@ -52,4 +52,20 @@ class AuthViewModel{
            }
        }
     }
+    
+    func getUserInfo(completionBlock: @escaping (_ success: Bool, _ msg: UserData?) -> Void){
+        firebaseManager.getUserData() {(success,userData) in
+            
+            if (success) {
+            completionBlock(true,userData)
+                
+            } else {
+               completionBlock(false,userData)
+            }
+        }
+    }
+    
+    func getEmailAndPic() -> (email: String?, pic: URL?){
+        return firebaseManager.emailAndProfilePic()
+    }
 }

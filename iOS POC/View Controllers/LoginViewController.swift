@@ -78,8 +78,13 @@ class LoginViewController: UIViewController {
     
     @IBAction func didTapSignUpButton(_ sender: UIButton) {
         print("SignUp Tapped")
-        performSegue(withIdentifier: "registerSegue", sender: self)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: "registerVC") as UIViewController
+                newViewController.modalPresentationStyle = .fullScreen
+                self.present(newViewController, animated: false, completion: nil)
     }
+    
+    
     
     
     func clearErrorText(){

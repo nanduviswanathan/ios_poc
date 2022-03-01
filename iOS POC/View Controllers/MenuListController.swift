@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 
 class MenuListController: UITableViewController {
-    var items = ["Profile","Location", "NearBy", "Logout"]
+    var items = ["Home","Profile","Location", "NearBy", "Logout"]
     
     let darkColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
     
@@ -39,16 +39,27 @@ class MenuListController: UITableViewController {
         
         switch (indexPath.row) {
         case 0:
-            print("profile")
-            print("pro pic -\(Auth.auth().currentUser?.photoURL) -- email - \(Auth.auth().currentUser?.email)--displayname - \(Auth.auth().currentUser?.displayName) ");
-
+            print("Home page")
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "HomeVC") as UIViewController
+                    newViewController.modalPresentationStyle = .fullScreen
+                    self.present(newViewController, animated: false, completion: nil)
+            
         case 1:
-            print("location")
-            showToast(message: "sample is herbdkfhagsdfgadsjfghdsafgldsfdsf", font: .systemFont(ofSize: 12.0))
+            print("profile")
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "profileVC") as UIViewController
+                    newViewController.modalPresentationStyle = .fullScreen
+                    self.present(newViewController, animated: false, completion: nil)
 
         case 2:
-            print("Nearby")
+            print("location")
+//            showToast(message: "sample is herbdkfhagsdfgadsjfghdsafgldsfdsf", font: .systemFont(ofSize: 12.0))
+
         case 3:
+            print("Nearby")
+        case 4:
             print("logout")
             
            showAlert()
@@ -87,3 +98,6 @@ class MenuListController: UITableViewController {
     
 
 }
+
+
+
