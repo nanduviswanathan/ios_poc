@@ -6,15 +6,13 @@
 //
 
 import Foundation
-import UIKit
 
 class AuthViewModel{
     
     // register new user
-    
     var firebaseManager: FirebasManger = FirebasManger()
     
-    func registerUser(photo: UIImage,firstName:String, lastName:String?,age:Int, email: String, password: String,  completionBlock: @escaping (_ success: Bool) -> Void) {
+    func registerUser(photo: Data?,firstName:String, lastName:String?,age:Int, email: String, password: String,  completionBlock: @escaping (_ success: Bool) -> Void) {
         firebaseManager.createUser(photo: photo, firstName: firstName, lastName: lastName, age: age, email: email, password: password)  {(success) in
         
             if (success) {
@@ -53,6 +51,7 @@ class AuthViewModel{
        }
     }
     
+    // get user details from firestore database
     func getUserInfo(completionBlock: @escaping (_ success: Bool, _ msg: UserData?) -> Void){
         firebaseManager.getUserData() {(success,userData) in
             
@@ -65,7 +64,15 @@ class AuthViewModel{
         }
     }
     
+    //get user email and profileUrl
     func getEmailAndPic() -> (email: String?, pic: URL?){
         return firebaseManager.emailAndProfilePic()
+    }
+    
+    //load image from firebase
+    func loadImage(completionBlock: @escaping (_ data: Data?) -> Void){
+        firebaseManager.loadprofileImage() {(imageData) in
+            completionBlock(imageData)
+        }
     }
 }

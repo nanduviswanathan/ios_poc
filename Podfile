@@ -6,7 +6,9 @@ target 'iOS POC' do
   use_frameworks!
 
   # Pods for iOS POC
-pod 'SideMenu'
+pod 'SideMenu', '~> 6.0'
+pod 'IQKeyboardManagerSwift', '6.3.0'
+
 
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'

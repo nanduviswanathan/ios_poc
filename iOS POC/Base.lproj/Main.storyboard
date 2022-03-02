@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="loginVC" id="BYZ-38-t0r" userLabel="Login View Controller" customClass="LoginViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="BYZ-38-t0r" userLabel="Login View Controller" customClass="LoginViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,7 +167,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="dnA-gt-ZQp">
             <objects>
-                <viewController storyboardIdentifier="registerVC" id="Qgh-oV-BRN" userLabel="Sign Up View Controller" customClass="RegisterViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterVC" id="Qgh-oV-BRN" userLabel="Sign Up View Controller" customClass="RegisterViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZhH-As-wsf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -432,7 +432,7 @@
         <!--Profile View Controller-->
         <scene sceneID="eMS-CE-jjH">
             <objects>
-                <viewController storyboardIdentifier="profileVC" id="Cv8-88-6JX" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileVC" id="Cv8-88-6JX" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7k5-yN-lCH">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

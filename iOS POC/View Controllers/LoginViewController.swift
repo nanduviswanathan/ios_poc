@@ -38,7 +38,6 @@ class LoginViewController: UIViewController {
     @IBAction func didTapContinueButton(_ sender: UIButton) {
         print("Continue tapped")
         clearErrorText()
-//        performSegue(withIdentifier: "loginToHomeScreenSegue", sender: self)
         guard let emailAddress = emailTextField.text, let password = passwordTextField.text else {
                 return
             }
@@ -55,20 +54,27 @@ class LoginViewController: UIViewController {
         self.loaderView.isHidden = false
            authVM?.logIn(email: emailAddress, pass: password) {[weak self] (success,msg) in
                guard let `self` = self else { return }
-               var message: String = ""
+               self.loaderView.isHidden = true
                if (success) {
-                   self.loaderView.isHidden = true
-                   let homeViewController = self.storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
-                   
-                   self.view.window?.rootViewController = homeViewController
-                   self.view.window?.makeKeyAndVisible()
+                
+//                   let storyBoard: UIStoryboard = UIStoryboard(name: Constants.Storyboard.storyBoardName, bundle: nil)
+//                   let newViewController = storyBoard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as UIViewController
+//                           newViewController.modalPresentationStyle = .fullScreen
+//                           self.present(newViewController, animated: false, completion: nil)
+                   AppNavigationHandler.goToHomeScreen(currentController: self)
                    
                } else {
-                   self.loaderView.isHidden = true
-                   message = msg
-                   let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                   alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                   self.present(alertController, animated: true, completion: nil)
+//                   self.loaderView.isHidden = true
+                   self.presentAlertWithTitle(title: nil, message: msg, options: Constants.AlertOptions.okButton) { (option) in
+                              print("option: \(option)")
+                              switch(option) {
+                                  case Constants.AlertOptions.okButton:
+                                      break
+                                  default:
+                                      break
+                              }
+                          }
+
                }
               
 
@@ -78,10 +84,11 @@ class LoginViewController: UIViewController {
     
     @IBAction func didTapSignUpButton(_ sender: UIButton) {
         print("SignUp Tapped")
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = storyBoard.instantiateViewController(withIdentifier: "registerVC") as UIViewController
-                newViewController.modalPresentationStyle = .fullScreen
-                self.present(newViewController, animated: false, completion: nil)
+//        let storyBoard: UIStoryboard = UIStoryboard(name: Constants.Storyboard.storyBoardName, bundle: nil)
+//        let newViewController = storyBoard.instantiateViewController(withIdentifier: Constants.Storyboard.registerViewController) as UIViewController
+//                newViewController.modalPresentationStyle = .fullScreen
+//                self.present(newViewController, animated: false, completion: nil)
+        AppNavigationHandler.goToRegisterScreen(currentController: self)
     }
     
     
@@ -123,15 +130,14 @@ class LoginViewController: UIViewController {
 
 }
 
-extension String {
-    func isValidEmail() -> Bool {
-        let emailReg: String = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-               let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailReg)
-        return emailTest.evaluate(with: self)
-        
-    }
-    
-    var isInt: Bool {
-          return Int(self) != nil
-      }
-}
+
+
+
+
+//if UserDefaults.standard.string(forKey: "token") != nil{
+//            navigateToHomeADS()
+//        }else if UserDefaults.standard.bool(forKey: "introWalkThroughShown") == false{
+//            navigateToIntro()
+//        }else{
+//            navigateToLogin()
+//        }

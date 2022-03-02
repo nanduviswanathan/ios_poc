@@ -8,11 +8,8 @@
 import Foundation
 import UIKit
 import SideMenu
-import FirebaseAuth
-import FirebaseStorage
 
 class ProfileViewController: UIViewController {
-
 
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastnameLabel: UILabel!
@@ -34,15 +31,7 @@ class ProfileViewController: UIViewController {
         loaderView.isHidden = false
         authVM = AuthViewModel()
         updateUI()
-        // Define the menu
-        menu = SideMenuNavigationController(rootViewController: MenuListController())
-        
-        menu?.leftSide = true
-        menu?.setNavigationBarHidden(true, animated: false)
-        
-        SideMenuManager.default.leftMenuNavigationController = menu
-        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
-
+        setUpSideMenu()
         
         print("Profile Started started");
         
@@ -53,7 +42,7 @@ class ProfileViewController: UIViewController {
         present(menu!,animated: true)
     }
     
-    
+    // update ui according to the user data
     func updateUI(){
         authVM?.getUserInfo() {[weak self] (success,userData) in
             guard let `self` = self else { return }
@@ -64,19 +53,27 @@ class ProfileViewController: UIViewController {
                 self.emailLabel.text = (": \(self.authVM?.getEmailAndPic().email ?? "")")
                 
                 //get image from firebase
-                
-                guard let link = self.authVM?.getEmailAndPic().pic else { return }
-                
-                let Ref = Storage.storage().reference(forURL: link.absoluteString)
-                Ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                    if error != nil {
-                        print("Error: Image could not download!")
+                self.authVM?.loadImage(){(imageData) in
+                    if imageData != nil {
+                        self.profileImageView.image = UIImage(data: imageData!)
                     } else {
-                        self.profileImageView.image = UIImage(data: data!)
-                        self.loaderView.isHidden = true
+                        print("Error: Image could not download!")
                     }
+                    self.loaderView.isHidden = true
                 }
             }
         }
+    }
+    
+    // sidemenu setup
+    func setUpSideMenu() {
+        menu = SideMenuNavigationController(rootViewController: MenuListController())
+        
+        menu?.leftSide = true
+        menu?.setNavigationBarHidden(true, animated: false)
+        
+        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
+
     }
 }

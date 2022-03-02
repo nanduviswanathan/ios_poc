@@ -37,17 +37,8 @@ class RegisterViewController: UIViewController {
         authVM = AuthViewModel()
         imagePicker.delegate = self
         loaderView.isHidden = true
-        
-        imageView.layer.borderWidth = 1
-        imageView.layer.masksToBounds = false
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.cornerRadius = imageView.frame.height/2
-        imageView.clipsToBounds = true
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
-        
+
+        customizeImageView()
         setUpUI()
     }
 
@@ -83,27 +74,35 @@ class RegisterViewController: UIViewController {
         }
         
         
+        
         loaderView.isHidden = false
-        authVM?.registerUser(photo:dp ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
+        authVM?.registerUser(photo:dp.jpegData(compressionQuality: 0.1) ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
             guard let `self` = self else { return }
-            var message: String = ""
             if (success) {
-                message = "User was sucessfully created."
-            } else {
-                message = "There was an error."
-            }
-            
-            self.loaderView.isHidden = true
-            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-                UIAlertAction in
-                NSLog("OK Pressed")
-                self.backToLoginPage()
+                self.loaderView.isHidden = true
+                self.presentAlertWithTitle(title: nil, message: Constants.CustomStrings.userCreationSucces, options: Constants.AlertOptions.okButton) { (option) in
+                           print("option: \(option)")
+                           switch(option) {
+                               case Constants.AlertOptions.okButton:
+                                    self.backToLoginPage()
+                                   break
+                               default:
+                                   break
+                           }
+                       }
 
+            } else {
+                self.loaderView.isHidden = true
+                self.presentAlertWithTitle(title: nil, message: Constants.CustomStrings.userCreationfail, options: Constants.AlertOptions.okButton) { (option) in
+                           print("option: \(option)")
+                           switch(option) {
+                               case Constants.AlertOptions.okButton:
+                                   break
+                               default:
+                                   break
+                           }
+                       }
             }
-            alertController.addAction(okAction)
-//            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
         }
 
     }
@@ -134,15 +133,26 @@ class RegisterViewController: UIViewController {
     func backToLoginPage() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // customize image view
+    func customizeImageView(){
+        
+        imageView.layer.borderWidth = 1
+        imageView.layer.masksToBounds = false
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.cornerRadius = imageView.frame.height/2
+        imageView.clipsToBounds = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+    }
 }
 
+// MARK: - Image picker
 
 extension RegisterViewController: UIImagePickerControllerDelegate ,  UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        
         guard let image = info[.editedImage] as? UIImage else { return }
-        
         imageView.image = image
         dismiss(animated: true)
     }

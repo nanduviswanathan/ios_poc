@@ -7,16 +7,14 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
 
 class MenuListController: UITableViewController {
-    var items = ["Home","Profile","Location", "NearBy", "Logout"]
+    var items = [Constants.SideMenuItems.homeMenu,Constants.SideMenuItems.profileMenu,Constants.SideMenuItems.locationMenu,Constants.SideMenuItems.nearbyMenu,Constants.SideMenuItems.logoutMenu]
     
-    let darkColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = darkColor
+        Utilities.styleTableView(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
@@ -28,7 +26,7 @@ class MenuListController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell" , for: indexPath)
         cell.textLabel?.text = items[indexPath.row]
         cell.textLabel?.textColor = .white
-        cell.backgroundColor = darkColor
+        Utilities.styleTableView(cell)
         return cell
     }
     
@@ -40,58 +38,62 @@ class MenuListController: UITableViewController {
         switch (indexPath.row) {
         case 0:
             print("Home page")
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "HomeVC") as UIViewController
-                    newViewController.modalPresentationStyle = .fullScreen
-                    self.present(newViewController, animated: false, completion: nil)
+            
+            AppNavigationHandler.goToHomeScreen(currentController: self)
+            break
             
         case 1:
             print("profile")
             
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "profileVC") as UIViewController
-                    newViewController.modalPresentationStyle = .fullScreen
-                    self.present(newViewController, animated: false, completion: nil)
+            AppNavigationHandler.goToProfileScreen(currentController: self)
+            break
 
         case 2:
             print("location")
 //            showToast(message: "sample is herbdkfhagsdfgadsjfghdsafgldsfdsf", font: .systemFont(ofSize: 12.0))
+            break
 
         case 3:
             print("Nearby")
+            break
         case 4:
             print("logout")
-            
-           showAlert()
+           showConfirmation()
+            break
 
-//
         default:
             print("Have you done something new?")
+            break
         }
     }
     
-    func showAlert(){
-        let alertController = UIAlertController(title: nil, message: "Are you sure you want to logout?", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-            UIAlertAction in
-            NSLog("OK Pressed")
-            self.logout()
-        }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+    // show logout confirmation
+    func showConfirmation(){
+        presentAlertWithTitle(title: nil, message: Constants.CustomStrings.logoutConfirmation, options: Constants.AlertOptions.okButton, Constants.AlertOptions.cancelButton) { (option) in
+                   print("option: \(option)")
+                   switch(option) {
+                       case Constants.AlertOptions.okButton:
+                       self.logout()
+                           break
+                       case Constants.AlertOptions.cancelButton:
+                           print("cancel button pressed")
+                           break
+                       default:
+                           break
+                   }
+               }
+
     }
     
+    
+    // logout currently logged in user
     func logout(){
         AuthViewModel().logOutUser(){[weak self] (success) in
                         guard let `self` = self else { return }
                 
                         if (success) {
                             print("success")
-                            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
-                                    newViewController.modalPresentationStyle = .fullScreen
-                                    self.present(newViewController, animated: false, completion: nil)
+                            AppNavigationHandler.goToLoginScreen(currentController: self)
                         }
                     }
     }

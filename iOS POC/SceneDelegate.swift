@@ -20,14 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if Auth.auth().currentUser != nil {
             // User signed in
-            let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeVC") as UIViewController
-            self.window?.rootViewController = initialViewController
+            navigateToHomeScreem()
+            
         } else {
           // No user is signed in.
-            let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "loginVC") as UIViewController
-            self.window?.rootViewController = initialViewController
+           navigateToLoginScreen()
         }
         
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -61,6 +58,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    // show home screen
+    func navigateToHomeScreem(){
+        let mainStoryboard : UIStoryboard = UIStoryboard(name: Constants.Storyboard.storyBoardName, bundle: nil)
+        let initialViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as UIViewController
+        self.window?.rootViewController = initialViewController
+    }
+    
+    //show login screen
+    func navigateToLoginScreen() {
+        let mainStoryboard : UIStoryboard = UIStoryboard(name: Constants.Storyboard.storyBoardName, bundle: nil)
+        let initialViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.Storyboard.loginViewController) as UIViewController
+        self.window?.rootViewController = initialViewController
+    }
 
 }
 

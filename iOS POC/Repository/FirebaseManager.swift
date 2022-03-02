@@ -13,7 +13,7 @@ import FirebaseStorage
 class FirebasManger {
     
     // Register a new User
-    func createUser(photo: UIImage,firstName:String, lastName:String?,age:Int, email: String, password: String,  completionBlock: @escaping (_ success: Bool) -> Void) {
+    func createUser(photo: Data?,firstName:String, lastName:String?,age:Int, email: String, password: String,  completionBlock: @escaping (_ success: Bool) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
             
             // Check for errors
@@ -26,14 +26,12 @@ class FirebasManger {
                 // User was created successfully, now store the first name and last name
                 let db = Firestore.firestore()
                 
-             
-                
                 guard let uid = result?.user.uid else { return }
                 let imageName = UUID().uuidString
                 let storageRef = Storage.storage().reference().child("users").child("\(uid)").child("\(imageName).jpg")
 
 
-                if let uploadData = photo.jpegData(compressionQuality: 0.1) {
+                if let uploadData = photo {
                     storageRef.putData(uploadData, metadata: nil, completion: { (_, error) in
                         if let error = error {
                             print(error)
@@ -84,18 +82,16 @@ class FirebasManger {
                 var errorData = ""
                 switch AuthErrorCode(rawValue: error.code) {
                 case .operationNotAllowed:
-                    
-                    errorData = " Error: Indicates that email and password accounts are not enabled. Enable them in the Auth section of the Firebase console."
+                    errorData = Constants.CustomStrings.operationNotAllowed
                     break
-
                 case .userDisabled:
-                    errorData = " Error: The user account has been disabled by an administrator."
+                    errorData = Constants.CustomStrings.userDisabled
                     break
                 case .wrongPassword:
-                    errorData = " Error: The password is invalid or the user does not have a password."
+                    errorData = Constants.CustomStrings.wrongPassword
                     break
                 case .invalidEmail:
-                    errorData = "Error: Indicates the email address is malformed."
+                    errorData = Constants.CustomStrings.invalidEmail
                     break
                 default:
                     errorData = "\(error.localizedDescription)"
@@ -104,10 +100,7 @@ class FirebasManger {
                 completionBlock(false, errorData)
               } else {
                 print("User signs in successfully")
-                let userInfo = Auth.auth().currentUser
-                let email = userInfo?.email
-                  print("user info email " + email! )
-                  completionBlock(true,"Success: User was sucessfully logged in." )
+                  completionBlock(true, Constants.CustomStrings.loginSucess )
               }
         }
     }
@@ -154,8 +147,23 @@ class FirebasManger {
                  }
     }
     
+    //get current user email and dp
     func emailAndProfilePic() -> (email: String?, pic: URL?){
         let firebaseUser = Auth.auth().currentUser
         return (firebaseUser?.email,firebaseUser?.photoURL)
+    }
+    
+    // load image
+    func loadprofileImage( completionBlock: @escaping (_ data: Data?) -> Void) {
+        guard let link = Auth.auth().currentUser?.photoURL else { return }
+        let Ref = Storage.storage().reference(forURL: link.absoluteString)
+        Ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                print("Error: Image could not download!")
+                completionBlock(nil)
+            } else {
+                completionBlock(data)
+            }
+        }
     }
 }
