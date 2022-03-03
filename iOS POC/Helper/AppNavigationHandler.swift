@@ -43,5 +43,4 @@ struct AppNavigationHandler{
         newViewController.modalPresentationStyle = .fullScreen
         currentController.present(newViewController, animated: false, completion: nil)
     }
-
 }

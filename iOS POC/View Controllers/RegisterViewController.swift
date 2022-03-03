@@ -37,9 +37,10 @@ class RegisterViewController: UIViewController {
         authVM = AuthViewModel()
         imagePicker.delegate = self
         loaderView.isHidden = true
-
+        
         customizeImageView()
         setUpUI()
+        closeKeyboardOnReturn()
     }
 
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
@@ -50,33 +51,13 @@ class RegisterViewController: UIViewController {
                 return
             }
         
-        if(dp == UIImage(systemName: "person.fill")){
+        if(dp == Constants.Image.personImage){
             profileErrorText.isHidden = false
             return
         }
-        if(firstName.isEmpty) {
-            firstNameErrorText.isHidden = false
-            return
-        }
-        if(age.isEmpty || !age.isInt) {
-            ageErrorText.isHidden = false
-            return
-        }
-        
-        if (emailAddress.isEmpty || !emailAddress.isValidEmail()) {
-            print("email error")
-                emailErrorText.isHidden = false
-                return
-        }
-        if (password.isEmpty) {
-         passwordErrorText.isHidden = false
-         return
-        }
-        
-        
-        
+
         loaderView.isHidden = false
-        authVM?.registerUser(photo:dp.jpegData(compressionQuality: 0.1) ,firstName: firstName, lastName: lastName, age: Int(age)!, email: emailAddress, password: password) {[weak self] (success) in
+        authVM?.registerUser(photo:dp.jpegData(compressionQuality: 0.1) ,firstName: firstName, lastName: lastName, age: age , email: emailAddress, password: password) {[weak self] (success, msg) in
             guard let `self` = self else { return }
             if (success) {
                 self.loaderView.isHidden = true
@@ -92,16 +73,43 @@ class RegisterViewController: UIViewController {
                        }
 
             } else {
+                
                 self.loaderView.isHidden = true
-                self.presentAlertWithTitle(title: nil, message: Constants.CustomStrings.userCreationfail, options: Constants.AlertOptions.okButton) { (option) in
-                           print("option: \(option)")
-                           switch(option) {
-                               case Constants.AlertOptions.okButton:
-                                   break
-                               default:
-                                   break
+                
+                switch (msg) {
+                    
+                    
+                case Constants.ErrorText.nameError:
+                    self.firstNameErrorText.text = Constants.ErrorText.nameError
+                    self.firstNameErrorText.isHidden = false
+                    break
+                    
+                case Constants.ErrorText.ageError:
+                    self.ageErrorText.text = Constants.ErrorText.ageError
+                    self.ageErrorText.isHidden = false
+                    break
+                   case Constants.ErrorText.emailError:
+                        self.emailErrorText.text = Constants.ErrorText.emailError
+                        self.emailErrorText.isHidden = false
+                        break
+                    
+                case Constants.ErrorText.emptyPassword:
+                        self.passwordErrorText.text = Constants.ErrorText.passwordError
+                        self.passwordErrorText.isHidden = false
+                        break
+                       
+                default:
+        
+                    self.presentAlertWithTitle(title: nil, message: Constants.CustomStrings.userCreationfail, options: Constants.AlertOptions.okButton) { (option) in
+                               print("option: \(option)")
+                               switch(option) {
+                                   case Constants.AlertOptions.okButton:
+                                       break
+                                   default:
+                                       break
+                               }
                            }
-                       }
+                }
             }
         }
 
@@ -145,6 +153,14 @@ class RegisterViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func closeKeyboardOnReturn(){
+        Utilities.returnKeyFunc(firstNameTextField)
+        Utilities.returnKeyFunc(lastNameTextField)
+        Utilities.returnKeyFunc(ageTextField)
+        Utilities.returnKeyFunc(emailTextField)
+        Utilities.returnKeyFunc(passwordTextField)
     }
 }
 

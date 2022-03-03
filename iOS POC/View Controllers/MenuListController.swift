@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 class MenuListController: UITableViewController {
-    var items = [Constants.SideMenuItems.homeMenu,Constants.SideMenuItems.profileMenu,Constants.SideMenuItems.locationMenu,Constants.SideMenuItems.nearbyMenu,Constants.SideMenuItems.logoutMenu]
+    var items = [Constants.SideMenuItems.homeMenu,Constants.SideMenuItems.profileMenu,Constants.SideMenuItems.nearbyMenu,Constants.SideMenuItems.logoutMenu]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Utilities.styleTableView(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = Constants.Colors.darkColor
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.SideMenuItems.cellIdentifier)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -23,10 +23,10 @@ class MenuListController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell" , for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SideMenuItems.cellIdentifier , for: indexPath)
         cell.textLabel?.text = items[indexPath.row]
         cell.textLabel?.textColor = .white
-        Utilities.styleTableView(cell)
+        cell.backgroundColor = Constants.Colors.darkColor
         return cell
     }
     
@@ -48,15 +48,11 @@ class MenuListController: UITableViewController {
             AppNavigationHandler.goToProfileScreen(currentController: self)
             break
 
-        case 2:
-            print("location")
-//            showToast(message: "sample is herbdkfhagsdfgadsjfghdsafgldsfdsf", font: .systemFont(ofSize: 12.0))
-            break
 
-        case 3:
+        case 2:
             print("Nearby")
             break
-        case 4:
+        case 3:
             print("logout")
            showConfirmation()
             break
@@ -100,6 +96,3 @@ class MenuListController: UITableViewController {
     
 
 }
-
-
-

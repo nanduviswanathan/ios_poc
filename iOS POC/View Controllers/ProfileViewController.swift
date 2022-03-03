@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController {
         loaderView.isHidden = false
         authVM = AuthViewModel()
         updateUI()
-        setUpSideMenu()
+        Utilities.setUpSideMenu(&menu, currentVC: self)
         
         print("Profile Started started");
         
@@ -63,17 +63,5 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    // sidemenu setup
-    func setUpSideMenu() {
-        menu = SideMenuNavigationController(rootViewController: MenuListController())
-        
-        menu?.leftSide = true
-        menu?.setNavigationBarHidden(true, animated: false)
-        
-        SideMenuManager.default.leftMenuNavigationController = menu
-        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
-
     }
 }

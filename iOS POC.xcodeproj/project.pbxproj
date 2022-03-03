@@ -11,8 +11,7 @@
 		D30E2ED827C952A900F033A5 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30E2ED727C952A900F033A5 /* FirebaseManager.swift */; };
 		D33A26FB27CCAE9A00091C3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A26FA27CCAE9A00091C3F /* ProfileViewController.swift */; };
 		D36DC24827CDDFD300DD9D46 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24727CDDFD300DD9D46 /* UserData.swift */; };
-		D36DC24C27CE5D7D00DD9D46 /* ToastExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24B27CE5D7D00DD9D46 /* ToastExtension.swift */; };
-		D36DC24E27CE672600DD9D46 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24D27CE672600DD9D46 /* AlertExtension.swift */; };
+		D36DC24E27CE672600DD9D46 /* Alert+ToastExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24D27CE672600DD9D46 /* Alert+ToastExtension.swift */; };
 		D36DC25027CE67F300DD9D46 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24F27CE67F300DD9D46 /* StringExtension.swift */; };
 		D36DC25527CE6E4B00DD9D46 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC25427CE6E4B00DD9D46 /* Constants.swift */; };
 		D36DC25C27CE989600DD9D46 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC25B27CE989600DD9D46 /* Utilities.swift */; };
@@ -37,8 +36,7 @@
 		D30E2ED727C952A900F033A5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		D33A26FA27CCAE9A00091C3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D36DC24727CDDFD300DD9D46 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		D36DC24B27CE5D7D00DD9D46 /* ToastExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastExtension.swift; sourceTree = "<group>"; };
-		D36DC24D27CE672600DD9D46 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
+		D36DC24D27CE672600DD9D46 /* Alert+ToastExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+ToastExtension.swift"; sourceTree = "<group>"; };
 		D36DC24F27CE67F300DD9D46 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		D36DC25427CE6E4B00DD9D46 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D36DC25B27CE989600DD9D46 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -106,8 +104,7 @@
 		D36DC24A27CE5C4400DD9D46 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D36DC24B27CE5D7D00DD9D46 /* ToastExtension.swift */,
-				D36DC24D27CE672600DD9D46 /* AlertExtension.swift */,
+				D36DC24D27CE672600DD9D46 /* Alert+ToastExtension.swift */,
 				D36DC24F27CE67F300DD9D46 /* StringExtension.swift */,
 			);
 			path = Extension;
@@ -301,7 +298,7 @@
 				D3C848D127BF78390095C705 /* LoginViewController.swift in Sources */,
 				D3C848CD27BF78390095C705 /* AppDelegate.swift in Sources */,
 				D3FB267C27C8BE8200F33F13 /* MenuListController.swift in Sources */,
-				D36DC24E27CE672600DD9D46 /* AlertExtension.swift in Sources */,
+				D36DC24E27CE672600DD9D46 /* Alert+ToastExtension.swift in Sources */,
 				D36DC25527CE6E4B00DD9D46 /* Constants.swift in Sources */,
 				D30E2ED827C952A900F033A5 /* FirebaseManager.swift in Sources */,
 				D3B22CF127C898BB00AE34C0 /* AuthViewModel.swift in Sources */,
@@ -310,7 +307,6 @@
 				D36DC25C27CE989600DD9D46 /* Utilities.swift in Sources */,
 				D3C848CF27BF78390095C705 /* SceneDelegate.swift in Sources */,
 				D36DC24827CDDFD300DD9D46 /* UserData.swift in Sources */,
-				D36DC24C27CE5D7D00DD9D46 /* ToastExtension.swift in Sources */,
 				D36DC25027CE67F300DD9D46 /* StringExtension.swift in Sources */,
 				D3E7208727C4B50100A692C3 /* RegisterViewController.swift in Sources */,
 			);
@@ -460,11 +456,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N4N795H35D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS POC/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location access for geofencing goodness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -479,6 +477,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gadgeon.iOS-POC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -491,11 +490,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N4N795H35D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS POC/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location access for geofencing goodness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -510,6 +511,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gadgeon.iOS-POC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

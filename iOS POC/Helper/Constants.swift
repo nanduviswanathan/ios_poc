@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constants {
     
@@ -17,6 +18,14 @@ struct Constants {
         static let loginViewController = "LoginVC"
         static let profileViewController = "ProfileVC"
         
+    }
+    
+    struct ErrorText{
+        static let emailError = "Please enter a valid email address"
+        static let passwordError = "Please enter valid password"
+        static let nameError = "Please enter a valid name"
+        static let ageError = "Please enter a valid age"
+        static let emptyPassword = "Password cannot be empty"
     }
     
     struct CustomStrings {
@@ -33,15 +42,35 @@ struct Constants {
     struct SideMenuItems {
         static let homeMenu = "Home"
         static let profileMenu = "Profile"
-        static let locationMenu = "Location"
         static let nearbyMenu = "NearBy"
         static let logoutMenu = "Logout"
+        static let cellIdentifier = "menuCellItem"
     }
     
     struct AlertOptions {
         static let okButton = "OK"
         static let cancelButton = "cancel"
     }
+    
+    struct Colors{
+        static let darkColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
+    }
+    
+    struct locationData{
+        static let locationIdentifier = "Home"
+        static let enteringRegion  = "Entering Region"
+        static let exitingRegion = "Exiting Region"
+        
+        static let testLatitude = 37.33233141
+        static let testLogitude = -122.0312186
+        
+        static let   radius = 100.00
+    }
+    
+    struct Image {
+        static let personImage = UIImage(systemName: "person.fill")
+    }
+    
     
     
 }

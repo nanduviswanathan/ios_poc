@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 import SideMenu
+import CoreLocation
 
 class HomeViewController: UIViewController {
     
     var menu:SideMenuNavigationController?
+    let locationManager = CLLocationManager()
     
     var authVM: AuthViewModel?
 
@@ -21,8 +23,8 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         authVM = AuthViewModel()
-        
-        setUpSideMenu()
+        Utilities.setUpSideMenu(&menu, currentVC: self)
+        geofenceSettings()
     }
 
     // hamburgger menu tap
@@ -30,19 +32,31 @@ class HomeViewController: UIViewController {
         present(menu!,animated: true)
     }
     
-    func setUpSideMenu() {
-        // Define the menu
-        menu = SideMenuNavigationController(rootViewController: MenuListController())
-        
-        menu?.leftSide = true
-        menu?.setNavigationBarHidden(true, animated: false)
-        
-        SideMenuManager.default.leftMenuNavigationController = menu
-        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
+    func geofenceSettings(){
+        self.locationManager.requestAlwaysAuthorization()
+        let geofenceRegionCenter = CLLocationCoordinate2D(
+            latitude: Constants.locationData.testLatitude,
+            longitude: Constants.locationData.testLogitude
+        )
+
+        /* Create a region centered on desired location,
+           choose a radius for the region (in meters)
+           choose a unique identifier for that region */
+        let geofenceRegion = CLCircularRegion(center: geofenceRegionCenter,
+                                              radius: Constants.locationData.radius,
+                                              identifier: Constants.locationData.locationIdentifier)
+        
+        geofenceRegion.notifyOnEntry = true
+        geofenceRegion.notifyOnExit = true
+        
+        self.locationManager.startMonitoring(for: geofenceRegion)
     
+    }
 }
 
 
