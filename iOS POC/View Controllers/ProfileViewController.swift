@@ -22,14 +22,14 @@ class ProfileViewController: UIViewController {
     
     var menu:SideMenuNavigationController?
     
-    var authVM: AuthViewModel?
+    var profileVM: ProfileViewModel?
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         loaderView.isHidden = false
-        authVM = AuthViewModel()
+        profileVM = ProfileViewModel()
         updateUI()
         Utilities.setUpSideMenu(&menu, currentVC: self)
         
@@ -43,23 +43,29 @@ class ProfileViewController: UIViewController {
     
     // update ui according to the user data
     func updateUI(){
-        authVM?.getUserInfo() {[weak self] (success,userData) in
+        profileVM?.getUserInfo() {[weak self] (success,userData) in
             guard let `self` = self else { return }
             if (success) {
                 self.firstNameLabel.text = (": \(userData!.firstname)")
                 self.lastnameLabel.text = (": \(userData!.lastname)")
                 self.ageLabel.text = (": \(userData!.age)")
-                self.emailLabel.text = (": \(self.authVM?.getEmailAndPic().email ?? "")")
+                self.emailLabel.text = ("\(self.profileVM?.getEmailAndPic().email ?? "")")
                 
                 //get image from firebase
-                self.authVM?.loadImage(){(imageData) in
-                    if imageData != nil {
-                        self.profileImageView.image = UIImage(data: imageData!)
-                    } else {
-                        print("Error: Image could not download!")
+
+                DispatchQueue.global(qos: .default).async {
+                    DispatchQueue.main.async {
+                        self.profileVM?.loadImage(){(imageData) in
+                            if imageData != nil {
+                                self.profileImageView.image = UIImage(data: imageData!)
+                            } else {
+                                print("Error: Image could not download!")
+                            }
+                            self.loaderView.isHidden = true
+                        }
                     }
-                    self.loaderView.isHidden = true
                 }
+                    
             }
         }
     }

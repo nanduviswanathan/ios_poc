@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var loaderView: UIView!
     
-    var authVM: AuthViewModel?
+    var registerVM: RegisterViewModel?
     
     var imagePicker = UIImagePickerController()
     
@@ -34,7 +34,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        authVM = AuthViewModel()
+        registerVM = RegisterViewModel()
         imagePicker.delegate = self
         loaderView.isHidden = true
         
@@ -56,7 +56,7 @@ class RegisterViewController: UIViewController {
         }
 
         loaderView.isHidden = false
-        authVM?.registerUser(photo:dp.jpegData(compressionQuality: 0.1) ,firstName: firstName, lastName: lastName, age: age , email: emailAddress, password: password) {[weak self] (success, msg) in
+        registerVM?.registerUser(photo:dp.jpegData(compressionQuality: 0.1) ,firstName: firstName, lastName: lastName, age: age , email: emailAddress, password: password) {[weak self] (success, msg) in
             guard let `self` = self else { return }
             if (success) {
                 self.loaderView.isHidden = true
@@ -64,7 +64,7 @@ class RegisterViewController: UIViewController {
                            print("option: \(option)")
                            switch(option) {
                                case Constants.AlertOptions.okButton:
-                                    self.backToLoginPage()
+                               AppNavigationHandler.goToHomeScreen(currentController: self)
                                    break
                                default:
                                    break
@@ -96,9 +96,8 @@ class RegisterViewController: UIViewController {
                         self.passwordErrorText.text = Constants.ErrorText.passwordError
                         self.passwordErrorText.isHidden = false
                         break
-                       
                 default:
-        
+                    
                     self.presentAlertWithTitle(title: nil, message: Constants.CustomStrings.userCreationfail, options: Constants.AlertOptions.okButton) { (option) in
                                print("option: \(option)")
                                switch(option) {

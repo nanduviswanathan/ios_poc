@@ -84,7 +84,7 @@ class MenuListController: UITableViewController {
     
     // logout currently logged in user
     func logout(){
-        AuthViewModel().logOutUser(){[weak self] (success) in
+        LoginViewModel().logOutUser(){[weak self] (success) in
                         guard let `self` = self else { return }
                 
                         if (success) {

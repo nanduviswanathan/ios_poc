@@ -80,4 +80,15 @@ struct Constants {
     // sample for exiting lat = 37.342331
     //    -122.031219
     
+    struct notificationName {
+        static let locationUpdateString = "locationUpdate"
+        
+        static let homeViewController = "HOME_VIEWCONTROLLER"
+        
+        static let myObject  = "myObject"
+    }
+    
+    
 }
+var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    

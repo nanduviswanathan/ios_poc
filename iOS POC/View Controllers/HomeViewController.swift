@@ -9,29 +9,29 @@ import Foundation
 import UIKit
 import SideMenu
 import CoreLocation
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
-    var appDelegate = UIApplication.shared.delegate as? AppDelegate
+//    var appDelegate = UIApplication.shared.delegate as? AppDelegate
     var menu:SideMenuNavigationController?
-    let locationManager = CLLocationManager()
-    var geofenceRegionCenter: CLLocationCoordinate2D?
-    var geofenceRegion: CLCircularRegion?
+
     
     @IBOutlet weak var myLocationLabel: UILabel!
     
     
     
-    var authVM: AuthViewModel?
+    var homeVM: HomeViewModel?
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        authVM = AuthViewModel()
+        homeVM = HomeViewModel()
         Utilities.setUpSideMenu(&menu, currentVC: self)
-        geofenceSettings()
+        homeVM?.startMonitoring()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUiFromLocation), name: .locationUpdate, object: nil)
         
     }
     // hamburgger menu tap
@@ -39,62 +39,23 @@ class HomeViewController: UIViewController {
         present(menu!,animated: true)
     }
     
+    // update ui
+    @objc func updateUiFromLocation(notification: Notification) {
+        let value = notification.userInfo?[Constants.notificationName.homeViewController] as? String
+        myLocationLabel.text = value!
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func geofenceSettings(){
-        self.locationManager.delegate = self
-        self.locationManager.requestAlwaysAuthorization()
-        self.geofenceRegionCenter = CLLocationCoordinate2D(
-            latitude: Constants.locationData.testLatitude,
-            longitude: Constants.locationData.testLogitude
-        )
-
-        /* Create a region centered on desired location,
-           choose a radius for the region (in meters)
-           choose a unique identifier for that region */
-        self.geofenceRegion = CLCircularRegion(center: geofenceRegionCenter!,
-                                              radius: Constants.locationData.radius,
-                                              identifier: Constants.locationData.locationIdentifier)
-        
-        geofenceRegion!.notifyOnEntry = true
-        geofenceRegion!.notifyOnExit = true
-        
-        self.locationManager.startMonitoring(for: geofenceRegion!)
-    
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
-        self.locationManager.stopMonitoring(for: geofenceRegion!)
-   
+        homeVM?.stopMonitoring()
     }
     
 }
 
-extension HomeViewController: CLLocationManagerDelegate {
-    
-    // called when user Exits a monitored region
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            // Do what you want if this information
-            print("user exited -\(region)")
-            myLocationLabel.text = Constants.locationData.outsideHome
-            self.appDelegate?.scheduleNotification(titleText: Constants.locationData.exitingRegion, bodyText: Constants.locationData.locationIdentifier)
-        }
-    }
-    
-    // called when user Enters a monitored region
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            // Do what you want if this information
-            print("user entered -\(region)")
-            myLocationLabel.text = Constants.locationData.insideHome
-            self.appDelegate?.scheduleNotification(titleText: Constants.locationData.enteringRegion, bodyText: Constants.locationData.locationIdentifier)
-        }
-    }
-}
 
 
 

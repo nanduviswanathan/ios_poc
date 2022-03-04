@@ -19,13 +19,13 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loaderView: UIView!
     
-    var authVM: AuthViewModel?
+    var loginVM: LoginViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         clearErrorText()
-        authVM = AuthViewModel()
+        loginVM = LoginViewModel()
             
         passwordTextField.textContentType = .oneTimeCode
         loaderView.isHidden = true
@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
                 return
             }
         self.loaderView.isHidden = false
-           authVM?.logIn(email: emailAddress, pass: password) {[weak self] (success,msg) in
+           loginVM?.logIn(email: emailAddress, pass: password) {[weak self] (success,msg) in
                guard let `self` = self else { return }
                self.loaderView.isHidden = true
                if (success) {
