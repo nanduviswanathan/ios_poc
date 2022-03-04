@@ -34,7 +34,6 @@ class ProfileViewController: UIViewController {
         Utilities.setUpSideMenu(&menu, currentVC: self)
         
         print("Profile Started started");
-        
    
     }
     

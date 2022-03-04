@@ -30,9 +30,10 @@ class LoginViewController: UIViewController {
         passwordTextField.textContentType = .oneTimeCode
         loaderView.isHidden = true
         
-        closeKeyboardOnReturn()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         print("App started");
-//        emailTextField.addTarget(self, action: #selector(checkAndDisplayEmailError(emailTextField:)), for: .editingChanged)
+ //        emailTextField.addTarget(self, action: #selector(checkAndDisplayEmailError(emailTextField:)), for: .editingChanged)
 //        passwordTextField.addTarget(self, action: #selector(checkAndDisplayPasswordError(passwordTextField:)), for: .editingChanged)
     }
 
@@ -88,9 +89,7 @@ class LoginViewController: UIViewController {
         passwordErrorText.isHidden = true
         emailErrorText.isHidden = true
     }
-    
-    func closeKeyboardOnReturn(){
-        Utilities.returnKeyFunc(emailTextField)
-        Utilities.returnKeyFunc(passwordTextField)
-    }
+
 }
+
+

@@ -10,12 +10,6 @@ import UIKit
 import SideMenu
 
 class Utilities {
-    
-    // to close keyboard on return key pressed
-    static func returnKeyFunc(_ textField: UITextField){
-        textField.addTarget(nil, action:Selector(("firstResponderAction:")), for:.editingDidEndOnExit)
-    }
-    
     // setup sidemenu
     static func setUpSideMenu(_ sideMenu: inout SideMenuNavigationController?, currentVC: UIViewController){
         sideMenu = SideMenuNavigationController(rootViewController: MenuListController())

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
+extension UIViewController:UITextFieldDelegate {
     
     // show alert
     func presentAlertWithTitle(title: String?, message: String, options: String..., completion: @escaping (String) -> Void) {
@@ -39,10 +39,22 @@ extension UIViewController {
             toastLabel.removeFromSuperview()
         })
     }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+      textField.resignFirstResponder()
+        return true
+    }
 }
-
-
-
+    
+//    extension UIViewController:UITextFieldDelegate {
+//
+//        public func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+//          textField.resignFirstResponder()
+//            return true
+//
+//        }
+//
+//    }
 
 //presentAlertWithTitle(title: "Test", message: "A sample message", options: "start", "stop", "cancel") { (option) in
 //           print("option: \(option)")

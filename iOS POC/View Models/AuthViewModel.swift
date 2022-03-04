@@ -14,24 +14,30 @@ class AuthViewModel{
     
     func registerUser(photo: Data?,firstName:String, lastName:String?,age: String, email: String, password: String,  completionBlock: @escaping (_ success: Bool, _ msg: String?) -> Void) {
         
-        if(firstName.isEmpty) {
+        let fName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lName = lastName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let userAge = age.trimmingCharacters(in: .whitespacesAndNewlines)
+        let emailId = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let pass = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if(fName.isEmpty) {
             completionBlock(false, Constants.ErrorText.nameError)
             return
         }
-        if(age.isEmpty || !age.isInt) {
+        if(userAge.isEmpty || !age.isInt) {
             completionBlock(false, Constants.ErrorText.ageError)
             return
         }
         
-        if (email.isEmpty || !email.isValidEmail()) {
+        if (!emailId.isValidEmail()) {
             completionBlock(false, Constants.ErrorText.emailError)
-                return
+            return
         }
-        if (password.isEmpty) {
-            completionBlock(false, Constants.ErrorText.emptyPassword)
-         return
+        if (!pass.isValidPassword()) {
+            completionBlock(false, Constants.ErrorText.passwordError)
+            return
         }
-        firebaseManager.createUser(photo: photo, firstName: firstName, lastName: lastName, age: Int(age)!, email: email, password: password)  {(success) in
+        firebaseManager.createUser(photo: photo, firstName: fName, lastName: lName, age: Int(userAge)!, email: emailId, password: pass)  {(success) in
         
             if (success) {
                 completionBlock(true,nil)
@@ -47,17 +53,19 @@ class AuthViewModel{
     // sign in with email and password
     func logIn(email: String, pass: String, completionBlock: @escaping (_ success: Bool, _ msg: String) -> Void) {
         
-        if (email.isEmpty || !email.isValidEmail() ) {
+        let emailId =  email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password = pass.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if (!emailId.isValidEmail() ) {
             completionBlock(false, Constants.ErrorText.emailError)
             return
             }
-        if (pass.isEmpty) {
+        if (!password.isValidPassword()) {
             completionBlock(false, Constants.ErrorText.passwordError)
             return
         }
-        print("data here " + email + pass )
         
-        firebaseManager.signIn(email: email, pass: pass) {(success,msg) in
+        firebaseManager.signIn(email: emailId, pass: password) {(success,msg) in
         
             if (success) {
             completionBlock(true,msg)

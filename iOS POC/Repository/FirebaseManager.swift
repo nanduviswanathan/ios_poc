@@ -99,7 +99,7 @@ class FirebasManger {
                 }
                 completionBlock(false, errorData)
               } else {
-                print("User signs in successfully")
+                print("User signed in successfully")
                   completionBlock(true, Constants.CustomStrings.loginSucess )
               }
         }

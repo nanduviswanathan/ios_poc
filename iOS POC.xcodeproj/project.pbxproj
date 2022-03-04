@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		1F860B43F940736C7C8EB6ED /* Pods_iOS_POC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4449A6B16E0692873F4C2A32 /* Pods_iOS_POC.framework */; };
 		D30E2ED827C952A900F033A5 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30E2ED727C952A900F033A5 /* FirebaseManager.swift */; };
+		D3368BCD27D0C65C0027AB05 /* UITextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3368BCC27D0C65C0027AB05 /* UITextfieldExtension.swift */; };
 		D33A26FB27CCAE9A00091C3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A26FA27CCAE9A00091C3F /* ProfileViewController.swift */; };
 		D36DC24827CDDFD300DD9D46 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24727CDDFD300DD9D46 /* UserData.swift */; };
-		D36DC24E27CE672600DD9D46 /* Alert+ToastExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24D27CE672600DD9D46 /* Alert+ToastExtension.swift */; };
+		D36DC24E27CE672600DD9D46 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24D27CE672600DD9D46 /* UIViewControllerExtension.swift */; };
 		D36DC25027CE67F300DD9D46 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24F27CE67F300DD9D46 /* StringExtension.swift */; };
 		D36DC25527CE6E4B00DD9D46 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC25427CE6E4B00DD9D46 /* Constants.swift */; };
 		D36DC25C27CE989600DD9D46 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC25B27CE989600DD9D46 /* Utilities.swift */; };
@@ -34,9 +35,10 @@
 		4449A6B16E0692873F4C2A32 /* Pods_iOS_POC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_POC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC942E0BCD0DA4B8201471B /* Pods-iOS POC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS POC.debug.xcconfig"; path = "Target Support Files/Pods-iOS POC/Pods-iOS POC.debug.xcconfig"; sourceTree = "<group>"; };
 		D30E2ED727C952A900F033A5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		D3368BCC27D0C65C0027AB05 /* UITextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextfieldExtension.swift; sourceTree = "<group>"; };
 		D33A26FA27CCAE9A00091C3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D36DC24727CDDFD300DD9D46 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		D36DC24D27CE672600DD9D46 /* Alert+ToastExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+ToastExtension.swift"; sourceTree = "<group>"; };
+		D36DC24D27CE672600DD9D46 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		D36DC24F27CE67F300DD9D46 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		D36DC25427CE6E4B00DD9D46 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D36DC25B27CE989600DD9D46 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -104,8 +106,9 @@
 		D36DC24A27CE5C4400DD9D46 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D36DC24D27CE672600DD9D46 /* Alert+ToastExtension.swift */,
+				D36DC24D27CE672600DD9D46 /* UIViewControllerExtension.swift */,
 				D36DC24F27CE67F300DD9D46 /* StringExtension.swift */,
+				D3368BCC27D0C65C0027AB05 /* UITextfieldExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -298,11 +301,12 @@
 				D3C848D127BF78390095C705 /* LoginViewController.swift in Sources */,
 				D3C848CD27BF78390095C705 /* AppDelegate.swift in Sources */,
 				D3FB267C27C8BE8200F33F13 /* MenuListController.swift in Sources */,
-				D36DC24E27CE672600DD9D46 /* Alert+ToastExtension.swift in Sources */,
+				D36DC24E27CE672600DD9D46 /* UIViewControllerExtension.swift in Sources */,
 				D36DC25527CE6E4B00DD9D46 /* Constants.swift in Sources */,
 				D30E2ED827C952A900F033A5 /* FirebaseManager.swift in Sources */,
 				D3B22CF127C898BB00AE34C0 /* AuthViewModel.swift in Sources */,
 				D33A26FB27CCAE9A00091C3F /* ProfileViewController.swift in Sources */,
+				D3368BCD27D0C65C0027AB05 /* UITextfieldExtension.swift in Sources */,
 				D36DC25F27CE9F2200DD9D46 /* AppNavigationHandler.swift in Sources */,
 				D36DC25C27CE989600DD9D46 /* Utilities.swift in Sources */,
 				D3C848CF27BF78390095C705 /* SceneDelegate.swift in Sources */,

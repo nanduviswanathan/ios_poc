@@ -40,7 +40,6 @@ class RegisterViewController: UIViewController {
         
         customizeImageView()
         setUpUI()
-        closeKeyboardOnReturn()
     }
 
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
@@ -93,7 +92,7 @@ class RegisterViewController: UIViewController {
                         self.emailErrorText.isHidden = false
                         break
                     
-                case Constants.ErrorText.emptyPassword:
+                case Constants.ErrorText.passwordError:
                         self.passwordErrorText.text = Constants.ErrorText.passwordError
                         self.passwordErrorText.isHidden = false
                         break
@@ -136,6 +135,12 @@ class RegisterViewController: UIViewController {
         emailErrorText.isHidden = true
         passwordErrorText.isHidden = true
         
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        ageTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
     }
     
     func backToLoginPage() {
@@ -153,14 +158,6 @@ class RegisterViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    func closeKeyboardOnReturn(){
-        Utilities.returnKeyFunc(firstNameTextField)
-        Utilities.returnKeyFunc(lastNameTextField)
-        Utilities.returnKeyFunc(ageTextField)
-        Utilities.returnKeyFunc(emailTextField)
-        Utilities.returnKeyFunc(passwordTextField)
     }
 }
 

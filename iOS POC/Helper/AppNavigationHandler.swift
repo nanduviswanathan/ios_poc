@@ -16,8 +16,10 @@ struct AppNavigationHandler{
         let storyBoard: UIStoryboard = UIStoryboard(name: Constants.Storyboard.storyBoardName, bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: Constants.Storyboard.loginViewController) as! LoginViewController
         newViewController.modalPresentationStyle = .fullScreen
-        currentController.present(newViewController, animated: false, completion: nil)
-        
+        weak var presentingViewController = currentController.presentingViewController
+        currentController.dismiss(animated: true, completion: {
+            presentingViewController?.present(newViewController, animated: false, completion: nil)
+        })
        }
     
     // Home Screen navigation
@@ -33,7 +35,11 @@ struct AppNavigationHandler{
         let storyBoard: UIStoryboard = UIStoryboard(name: Constants.Storyboard.storyBoardName, bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: Constants.Storyboard.profileViewController) as UIViewController
         newViewController.modalPresentationStyle = .fullScreen
-        currentController.present(newViewController, animated: false, completion: nil)
+        weak var presentingViewController = currentController.presentingViewController
+        currentController.dismiss(animated: true, completion: {
+            presentingViewController?.present(newViewController, animated: false, completion: nil)
+        })
+        
     }
     
     //Register Screen navigation

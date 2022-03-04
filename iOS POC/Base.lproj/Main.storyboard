@@ -414,17 +414,26 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGh-jv-nIE" userLabel="myLocationLabel">
+                                <rect key="frame" x="195" y="395" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.67687678340000001" blue="0.61392420530000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sbt-v6-F2V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="iGh-jv-nIE" firstAttribute="centerX" secondItem="KRQ-nM-FpE" secondAttribute="centerX" id="8iH-zr-9RX"/>
                             <constraint firstItem="YLh-CJ-ngD" firstAttribute="trailing" secondItem="Sbt-v6-F2V" secondAttribute="trailing" id="91W-mz-vVr"/>
                             <constraint firstItem="YLh-CJ-ngD" firstAttribute="leading" secondItem="Sbt-v6-F2V" secondAttribute="leading" id="ZFw-4b-x7T"/>
                             <constraint firstItem="YLh-CJ-ngD" firstAttribute="top" secondItem="Sbt-v6-F2V" secondAttribute="top" id="ZzN-Pm-HiI"/>
+                            <constraint firstItem="iGh-jv-nIE" firstAttribute="centerY" secondItem="KRQ-nM-FpE" secondAttribute="centerY" id="bGj-xZ-39a"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ytf-qK-5DZ"/>
                     <connections>
+                        <outlet property="myLocationLabel" destination="iGh-jv-nIE" id="2fW-ez-HRA"/>
                         <segue destination="Cv8-88-6JX" kind="presentation" identifier="profileSegue" id="sCl-xx-kxf"/>
                     </connections>
                 </viewController>

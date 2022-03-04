@@ -8,14 +8,13 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
-import CoreLocation
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var locationManager: CLLocationManager!
-    var notificationCenter: UNUserNotificationCenter!
+    let notificationCenter = UNUserNotificationCenter.current()
 
 
 
@@ -26,12 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         
-        
-       setupGeofencing()
-        
-        if launchOptions?[UIApplication.LaunchOptionsKey.location] != nil {
-            print("I woke up thanks to geofencing")
-        }
+        notificationCenter.delegate = self
+                
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+                
+                notificationCenter.requestAuthorization(options: options) {
+                    (didAllow, error) in
+                    if !didAllow {
+                        print("User has declined notifications")
+                    }
+                }
+
 
         return true
     }
@@ -49,102 +53,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+}
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    
-    //setup geofencing
-    
-    func setupGeofencing() {
-        self.locationManager = CLLocationManager()
-        self.locationManager!.delegate = self
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        // get the singleton object
-        self.notificationCenter = UNUserNotificationCenter.current()
-        
-        // register as it's delegate
-        notificationCenter.delegate = self
-        
-        // define what do you need permission to use
-        let options: UNAuthorizationOptions = [.alert, .sound]
-        
-        // request permission
-        notificationCenter.requestAuthorization(options: options) { (granted, error) in
-            if !granted {
-                print("Permission not granted")
-            }
-        }
+        completionHandler([.alert, .sound])
     }
     
-    // Show local notification
-    func handleEvent(forRegion region: CLRegion!, titleText:String, bodyText:String) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        // customize your notification content
+        if response.notification.request.identifier == "Local Notification" {
+            print("Handling notifications with the Local Notification Identifier")
+        }
+        
+        completionHandler()
+    }
+    
+    func scheduleNotification(titleText:String, bodyText:String) {
+        
         let content = UNMutableNotificationContent()
+        
         content.title = titleText
         content.body = bodyText
         content.sound = UNNotificationSound.default
+        content.badge = 1
         
-        // when the notification will be triggered
-        let timeInSeconds: TimeInterval = 3
-        // the actual trigger object
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: timeInSeconds,
-            repeats: false
-        )
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        let identifier = "Local Notification"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
-        // notification unique identifier, for this example, same as the region to avoid duplicate notifications
-        let identifier = region.identifier
-        
-        // the notification request object
-        let request = UNNotificationRequest(
-            identifier: identifier,
-            content: content,
-            trigger: trigger
-        )
-        
-        // trying to add the notification request to notification center
-        notificationCenter.add(request, withCompletionHandler: { (error) in
-            if error != nil {
-                print("Error adding notification with identifier: \(identifier)")
+        notificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Error \(error.localizedDescription)")
             }
-        })
-    }
-}
-
-extension AppDelegate: CLLocationManagerDelegate {
-    // called when user Exits a monitored region
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            // Do what you want if this information
-            print("user exited -\(region)")
-            self.handleEvent(forRegion: region,titleText: Constants.locationData.exitingRegion, bodyText: Constants.locationData.locationIdentifier)
-        }
-    }
-    
-    // called when user Enters a monitored region
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            // Do what you want if this information
-            print("user entered -\(region)")
-            self.handleEvent(forRegion: region,titleText: Constants.locationData.enteringRegion, bodyText: Constants.locationData.locationIdentifier)
         }
     }
 }
-
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // when app is onpen and in foregroud
-        completionHandler(.alert)
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        // get the notification identifier to respond accordingly
-        let identifier = response.notification.request.identifier
-        
-        // do what you need to do
-        print(identifier)
-        // ...
-    }
-}

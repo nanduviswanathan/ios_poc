@@ -22,10 +22,9 @@ struct Constants {
     
     struct ErrorText{
         static let emailError = "Please enter a valid email address"
-        static let passwordError = "Please enter valid password"
+        static let passwordError = "password must contain 6 characters"
         static let nameError = "Please enter a valid name"
         static let ageError = "Please enter a valid age"
-        static let emptyPassword = "Password cannot be empty"
     }
     
     struct CustomStrings {
@@ -56,21 +55,29 @@ struct Constants {
         static let darkColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
     }
     
-    struct locationData{
+    struct locationData {
+        
         static let locationIdentifier = "Home"
         static let enteringRegion  = "Entering Region"
         static let exitingRegion = "Exiting Region"
         
-        static let testLatitude = 37.33233141
-        static let testLogitude = -122.0312186
+        static let insideHome = "Hi, You are inside Home"
+        static let outsideHome = "Hi, You are outside Home"
+        
+        static let testLatitude = 10.022659116870798
+//        37.33233141
+        static let testLogitude = 76.34480352262618
+//        -122.0312186
         
         static let   radius = 100.00
+        
     }
     
     struct Image {
         static let personImage = UIImage(systemName: "person.fill")
     }
     
-    
+    // sample for exiting lat = 37.342331
+    //    -122.031219
     
 }
