@@ -61,10 +61,11 @@ class ProfileViewController: UIViewController {
                             } else {
                                 print("Error: Image could not download!")
                             }
-                            self.loaderView.isHidden = true
+                           
                         }
                     }
                 }
+                self.loaderView.isHidden = true
                     
             }
         }

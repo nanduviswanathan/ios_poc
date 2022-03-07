@@ -14,7 +14,6 @@ class HomeViewModel: NSObject {
     var geofenceRegionCenter: CLLocationCoordinate2D?
     var geofenceRegion: CLCircularRegion?
     
-    
     func startMonitoring() {
         self.locationManager.delegate = self
         self.locationManager.requestAlwaysAuthorization()
@@ -33,7 +32,7 @@ class HomeViewModel: NSObject {
         geofenceRegion!.notifyOnEntry = true
         geofenceRegion!.notifyOnExit = true
         
-//        self.currentState()
+        self.locationManager.startMonitoring(for: geofenceRegion!)
     
     }
     
@@ -44,6 +43,10 @@ class HomeViewModel: NSObject {
     func stopMonitoring() {
         self.locationManager.stopMonitoring(for: geofenceRegion!)
     }
+    
+    func postLocalNotification(data: String) {
+        NotificationCenter.default.post(name: .locationUpdate, object:Constants.notificationName.myObject , userInfo: [Constants.notificationName.homeViewController: data])
+    }
 }
 extension HomeViewModel: CLLocationManagerDelegate {
     
@@ -52,7 +55,7 @@ extension HomeViewModel: CLLocationManagerDelegate {
         if region is CLCircularRegion {
             // Do what you want if this information
             print("user exited -\(region)")
-            NotificationCenter.default.post(name: .locationUpdate, object:Constants.notificationName.myObject , userInfo: [Constants.notificationName.homeViewController: Constants.locationData.outsideHome])
+            postLocalNotification(data: Constants.locationData.outsideHome)
             appDelegate.scheduleNotification(titleText: Constants.locationData.exitingRegion, bodyText: Constants.locationData.locationIdentifier)
         }
     }
@@ -62,18 +65,18 @@ extension HomeViewModel: CLLocationManagerDelegate {
         if region is CLCircularRegion {
             // Do what you want if this information
             print("user entered -\(region)")
-            NotificationCenter.default.post(name: .locationUpdate, object: Constants.notificationName.myObject, userInfo: [Constants.notificationName.homeViewController: Constants.locationData.insideHome])
+            postLocalNotification(data: Constants.locationData.insideHome)
             appDelegate.scheduleNotification(titleText: Constants.locationData.enteringRegion, bodyText: Constants.locationData.locationIdentifier)
         }
     }
     
-//    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-//        if state == .inside {
-//            NotificationCenter.default.post(name: .locationUpdate, object: "myObject", userInfo: [Constants.notificationName.homeViewController: Constants.locationData.insideHome])
-//              } else {
-//                  NotificationCenter.default.post(name: .locationUpdate, object: "myObject", userInfo: [Constants.notificationName.homeViewController: Constants.locationData.outsideHome])
-//              }
-//
-//    }
+    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        if state == .inside {
+            postLocalNotification(data: Constants.locationData.insideHome)
+              } else {
+                  postLocalNotification(data: Constants.locationData.outsideHome)
+              }
+
+    }
 }
 

@@ -11,7 +11,6 @@ extension String {
     func isValidEmail() -> Bool {
         let emailReg: String = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
         let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailReg)
-        print("swlf--------\(self)")
         return emailTest.evaluate(with: self)
         
     }
@@ -21,7 +20,6 @@ extension String {
       }
     
     func isValidPassword() -> Bool {
-        print("-------\(self.count >= 6)")
         return self.count >= 6
     }
 }

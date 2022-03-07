@@ -34,6 +34,12 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateUiFromLocation), name: .locationUpdate, object: nil)
         
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        homeVM?.currentState()
+    }
+    
     // hamburgger menu tap
     @IBAction func didTapHamburger(_ sender: UIBarButtonItem) {
         present(menu!,animated: true)
