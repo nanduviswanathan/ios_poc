@@ -15,7 +15,7 @@ import Foundation
 import Foundation
 
 // MARK: - UserData
-struct UserData: Codable {
+struct UserDataModel: Codable {
     let lastname, uid: String
     let age: Int
     let firstname: String

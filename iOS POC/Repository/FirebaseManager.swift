@@ -120,7 +120,7 @@ class FirebasManger {
     
 //
       
-    func getUserData( completionBlock: @escaping (_ success: Bool, _ data: UserData?) -> Void) {
+    func getUserData( completionBlock: @escaping (_ success: Bool, _ data: UserDataModel?) -> Void) {
         let docRef = Firestore.firestore()
                     .collection("users")
                     .whereField("uid", isEqualTo: Auth.auth().currentUser?.uid ?? "")
@@ -141,7 +141,7 @@ class FirebasManger {
 //                         print(firstname)
 //                         print("data is  => \(dataDescription)")
                          let jsonData = try! JSONSerialization.data(withJSONObject: dataDescription)
-                         let userData = try? JSONDecoder().decode(UserData.self, from: jsonData)
+                         let userData = try? JSONDecoder().decode(UserDataModel.self, from: jsonData)
                          completionBlock(true,userData)
                      }
                  }

@@ -8,6 +8,8 @@ target 'iOS POC' do
   # Pods for iOS POC
 pod 'SideMenu', '~> 6.0'
 pod 'IQKeyboardManagerSwift', '6.3.0'
+pod 'Charts', '3.6.0'
+pod 'Alamofire', '~> 5.5'
 
 
 pod 'Firebase/Analytics'

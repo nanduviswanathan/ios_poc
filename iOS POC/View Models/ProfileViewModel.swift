@@ -12,7 +12,7 @@ class ProfileViewModel {
     var firebaseManager: FirebasManger = FirebasManger()
     
     // get user details from firestore database
-    func getUserInfo(completionBlock: @escaping (_ success: Bool, _ msg: UserData?) -> Void){
+    func getUserInfo(completionBlock: @escaping (_ success: Bool, _ msg: UserDataModel?) -> Void){
         
         firebaseManager.getUserData() {(success,userData) in
             

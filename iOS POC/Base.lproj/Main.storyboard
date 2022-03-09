@@ -435,6 +435,7 @@
                     <connections>
                         <outlet property="myLocationLabel" destination="iGh-jv-nIE" id="2fW-ez-HRA"/>
                         <segue destination="Cv8-88-6JX" kind="presentation" identifier="profileSegue" id="sCl-xx-kxf"/>
+                        <segue destination="ali-o0-C7l" kind="presentation" identifier="weatherSegue" id="l1L-OH-AMw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W28-tT-VGv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -628,6 +629,90 @@
             </objects>
             <point key="canvasLocation" x="1085" y="1395"/>
         </scene>
+        <!--Weather View Controller-->
+        <scene sceneID="a7U-dW-UcR">
+            <objects>
+                <viewController storyboardIdentifier="WeatherVC" id="ali-o0-C7l" customClass="WeatherViewController" customModule="iOS_POC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cad-YT-0SI">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3T3-Ap-Rsk">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4b9-wA-v7f"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Weather" id="xpz-b0-Fm2">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="hamburger" id="vIr-gd-dB6">
+                                            <connections>
+                                                <action selector="didTapHamburggerMenu:" destination="ali-o0-C7l" id="mP9-om-Saj"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iyj-h6-dEk">
+                                <rect key="frame" x="20" y="70" width="350" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2xv-J7-57h">
+                                        <rect key="frame" x="0.0" y="0.0" width="308.66666666666669" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJL-Oz-yvh" userLabel="search">
+                                        <rect key="frame" x="328.66666666666669" y="0.0" width="21.333333333333314" height="50"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="magnifyingglass" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapSearchButton:" destination="ali-o0-C7l" eventType="touchUpInside" id="1bj-Yl-0FC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="gwb-ei-nf1"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nP4-zj-73f">
+                                <rect key="frame" x="20" y="140" width="350" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.67687678340000001" blue="0.61392420530000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lMS-o3-ukj" userLabel="WeatherView" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="160" width="350" height="596"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Rgb-9f-AD3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nP4-zj-73f" firstAttribute="leading" secondItem="Rgb-9f-AD3" secondAttribute="leading" constant="20" id="4Lb-x1-fdF"/>
+                            <constraint firstItem="Rgb-9f-AD3" firstAttribute="trailing" secondItem="iyj-h6-dEk" secondAttribute="trailing" constant="20" id="I8P-OJ-vCJ"/>
+                            <constraint firstItem="iyj-h6-dEk" firstAttribute="top" secondItem="3T3-Ap-Rsk" secondAttribute="bottom" constant="20" id="Q5X-co-5b0"/>
+                            <constraint firstItem="nP4-zj-73f" firstAttribute="top" secondItem="iyj-h6-dEk" secondAttribute="bottom" constant="20" id="Ssa-Us-avL"/>
+                            <constraint firstItem="lMS-o3-ukj" firstAttribute="top" secondItem="nP4-zj-73f" secondAttribute="bottom" constant="20" id="bvX-hi-BTc"/>
+                            <constraint firstItem="lMS-o3-ukj" firstAttribute="trailing" secondItem="Rgb-9f-AD3" secondAttribute="trailing" constant="-20" id="ed8-z5-E00"/>
+                            <constraint firstItem="3T3-Ap-Rsk" firstAttribute="leading" secondItem="Rgb-9f-AD3" secondAttribute="leading" id="eht-gX-ZVL"/>
+                            <constraint firstItem="3T3-Ap-Rsk" firstAttribute="trailing" secondItem="Rgb-9f-AD3" secondAttribute="trailing" id="jYP-df-bQ5"/>
+                            <constraint firstItem="3T3-Ap-Rsk" firstAttribute="top" secondItem="Rgb-9f-AD3" secondAttribute="top" id="mVr-dr-DhP"/>
+                            <constraint firstItem="lMS-o3-ukj" firstAttribute="leading" secondItem="Rgb-9f-AD3" secondAttribute="leading" constant="20" id="rVf-yq-Zi6"/>
+                            <constraint firstItem="Rgb-9f-AD3" firstAttribute="trailing" secondItem="nP4-zj-73f" secondAttribute="trailing" constant="20" id="rph-0C-Zef"/>
+                            <constraint firstItem="iyj-h6-dEk" firstAttribute="leading" secondItem="Rgb-9f-AD3" secondAttribute="leading" constant="20" id="xIO-5m-jF2"/>
+                            <constraint firstItem="lMS-o3-ukj" firstAttribute="bottom" secondItem="Rgb-9f-AD3" secondAttribute="bottom" id="yrT-ua-tc0"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="barChartView" destination="lMS-o3-ukj" id="8nR-3H-p1c"/>
+                        <outlet property="cityInfoLabel" destination="nP4-zj-73f" id="GTC-UU-xfE"/>
+                        <outlet property="cityNameTextField" destination="2xv-J7-57h" id="d08-9j-zBM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GeL-Jh-iQW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1830.7692307692307" y="1394.7867298578199"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="gZm-Rh-pU0">
             <objects>
@@ -653,6 +738,7 @@
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="hamburger" width="50" height="50"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -53,7 +53,6 @@ class ProfileViewController: UIViewController {
                 
                 //get image from firebase
 
-                DispatchQueue.global(qos: .default).async {
                     DispatchQueue.main.async {
                         self.profileVM?.loadImage(){(imageData) in
                             if imageData != nil {
@@ -64,7 +63,6 @@ class ProfileViewController: UIViewController {
                            
                         }
                     }
-                }
                 self.loaderView.isHidden = true
                     
             }

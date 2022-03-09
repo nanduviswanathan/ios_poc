@@ -17,6 +17,7 @@ struct Constants {
         static let registerViewController = "RegisterVC"
         static let loginViewController = "LoginVC"
         static let profileViewController = "ProfileVC"
+        static let weatherViewController  = "WeatherVC"
         
     }
     
@@ -36,11 +37,13 @@ struct Constants {
         static let operationNotAllowed = "Error: Indicates that email and password accounts are not enabled. Enable them in the Auth section of the Firebase console."
         static let wrongPassword = "Error: The password is invalid or the user does not have a password."
         static let invalidEmail = "Error: Indicates the email address is malformed."
+        static let cityError = "Error: City doesn't Exist"
     }
     
     struct SideMenuItems {
         static let homeMenu = "Home"
         static let profileMenu = "Profile"
+        static let weatherMenu = "Weather"
         static let nearbyMenu = "NearBy"
         static let logoutMenu = "Logout"
         static let cellIdentifier = "menuCellItem"
@@ -53,6 +56,7 @@ struct Constants {
     
     struct Colors{
         static let darkColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
+        static let backgroundColor = UIColor(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
     }
     
     struct locationData {
@@ -88,6 +92,13 @@ struct Constants {
         static let myObject  = "myObject"
     }
     
+    struct weatherInfo {
+       static let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?exclude=current,hourly,minutely&units=metric&appid="
+       static let appId = "99dcc091f4bde9aaa3d87ebd82e0a85c"
+        
+        static let tempInC = "temp in °C"
+        static let weatherIn = "Weather in "
+    }
     
 }
 var appDelegate = UIApplication.shared.delegate as! AppDelegate

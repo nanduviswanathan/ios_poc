@@ -49,4 +49,16 @@ struct AppNavigationHandler{
         newViewController.modalPresentationStyle = .fullScreen
         currentController.present(newViewController, animated: false, completion: nil)
     }
+    
+    // go to weather screen
+    static func goToWeatherScreen(currentController: UIViewController) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: Constants.Storyboard.storyBoardName, bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: Constants.Storyboard.weatherViewController) as UIViewController
+        newViewController.modalPresentationStyle = .fullScreen
+        weak var presentingViewController = currentController.presentingViewController
+        currentController.dismiss(animated: true, completion: {
+            presentingViewController?.present(newViewController, animated: false, completion: nil)
+        })
+        
+    }
 }

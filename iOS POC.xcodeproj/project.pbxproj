@@ -10,7 +10,7 @@
 		1F860B43F940736C7C8EB6ED /* Pods_iOS_POC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4449A6B16E0692873F4C2A32 /* Pods_iOS_POC.framework */; };
 		D30E2ED827C952A900F033A5 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30E2ED727C952A900F033A5 /* FirebaseManager.swift */; };
 		D33A26FB27CCAE9A00091C3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A26FA27CCAE9A00091C3F /* ProfileViewController.swift */; };
-		D36DC24827CDDFD300DD9D46 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24727CDDFD300DD9D46 /* UserData.swift */; };
+		D36DC24827CDDFD300DD9D46 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24727CDDFD300DD9D46 /* UserDataModel.swift */; };
 		D36DC24E27CE672600DD9D46 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24D27CE672600DD9D46 /* UIViewControllerExtension.swift */; };
 		D36DC25027CE67F300DD9D46 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC24F27CE67F300DD9D46 /* StringExtension.swift */; };
 		D36DC25527CE6E4B00DD9D46 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DC25427CE6E4B00DD9D46 /* Constants.swift */; };
@@ -20,6 +20,11 @@
 		D375AFD427D23A050027BC8F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D375AFD327D23A050027BC8F /* ProfileViewModel.swift */; };
 		D375AFD627D240F40027BC8F /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D375AFD527D240F40027BC8F /* NotificationExtension.swift */; };
 		D3B22CF127C898BB00AE34C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B22CF027C898BB00AE34C0 /* LoginViewModel.swift */; };
+		D3B3A1AD27D5E45500616565 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B3A1AC27D5E45500616565 /* WeatherViewController.swift */; };
+		D3B3A1AF27D63D9800616565 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B3A1AE27D63D9800616565 /* WeatherData.swift */; };
+		D3B3A1B127D64C4900616565 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B3A1B027D64C4900616565 /* WeatherViewModel.swift */; };
+		D3B3A1B327D724CC00616565 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B3A1B227D724CC00616565 /* WeatherModel.swift */; };
+		D3B3A1B827D7391C00616565 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B3A1B727D7391C00616565 /* ApiService.swift */; };
 		D3C848CD27BF78390095C705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C848CC27BF78390095C705 /* AppDelegate.swift */; };
 		D3C848CF27BF78390095C705 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C848CE27BF78390095C705 /* SceneDelegate.swift */; };
 		D3C848D127BF78390095C705 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C848D027BF78390095C705 /* LoginViewController.swift */; };
@@ -39,7 +44,7 @@
 		7EC942E0BCD0DA4B8201471B /* Pods-iOS POC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS POC.debug.xcconfig"; path = "Target Support Files/Pods-iOS POC/Pods-iOS POC.debug.xcconfig"; sourceTree = "<group>"; };
 		D30E2ED727C952A900F033A5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		D33A26FA27CCAE9A00091C3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		D36DC24727CDDFD300DD9D46 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		D36DC24727CDDFD300DD9D46 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		D36DC24D27CE672600DD9D46 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		D36DC24F27CE67F300DD9D46 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		D36DC25427CE6E4B00DD9D46 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -49,6 +54,11 @@
 		D375AFD327D23A050027BC8F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		D375AFD527D240F40027BC8F /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		D3B22CF027C898BB00AE34C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		D3B3A1AC27D5E45500616565 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		D3B3A1AE27D63D9800616565 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		D3B3A1B027D64C4900616565 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		D3B3A1B227D724CC00616565 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		D3B3A1B727D7391C00616565 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		D3C848C927BF78390095C705 /* iOS POC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS POC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3C848CC27BF78390095C705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3C848CE27BF78390095C705 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,7 +114,9 @@
 		D36DC24927CDE09200DD9D46 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D36DC24727CDDFD300DD9D46 /* UserData.swift */,
+				D36DC24727CDDFD300DD9D46 /* UserDataModel.swift */,
+				D3B3A1B227D724CC00616565 /* WeatherModel.swift */,
+				D3B3A1AE27D63D9800616565 /* WeatherData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,6 +141,14 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		D3B3A1B627D7390900616565 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D3B3A1B727D7391C00616565 /* ApiService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		D3C848C027BF78390095C705 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +170,7 @@
 		D3C848CB27BF78390095C705 /* iOS POC */ = {
 			isa = PBXGroup;
 			children = (
+				D3B3A1B627D7390900616565 /* Service */,
 				D36DC25327CE6E3800DD9D46 /* Helper */,
 				D36DC24A27CE5C4400DD9D46 /* Extension */,
 				D36DC24927CDE09200DD9D46 /* Model */,
@@ -175,6 +196,7 @@
 				D3E7208827C4B51400A692C3 /* HomeViewController.swift */,
 				D3FB267B27C8BE8200F33F13 /* MenuListController.swift */,
 				D33A26FA27CCAE9A00091C3F /* ProfileViewController.swift */,
+				D3B3A1AC27D5E45500616565 /* WeatherViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -186,6 +208,7 @@
 				D3F7715627D225BE00E1ECDA /* HomeViewModel.swift */,
 				D375AFD127D239F20027BC8F /* RegisterViewModel.swift */,
 				D375AFD327D23A050027BC8F /* ProfileViewModel.swift */,
+				D3B3A1B027D64C4900616565 /* WeatherViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -307,7 +330,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3E7208927C4B51400A692C3 /* HomeViewController.swift in Sources */,
+				D3B3A1AD27D5E45500616565 /* WeatherViewController.swift in Sources */,
 				D3C848D127BF78390095C705 /* LoginViewController.swift in Sources */,
+				D3B3A1B127D64C4900616565 /* WeatherViewModel.swift in Sources */,
 				D3C848CD27BF78390095C705 /* AppDelegate.swift in Sources */,
 				D3FB267C27C8BE8200F33F13 /* MenuListController.swift in Sources */,
 				D36DC24E27CE672600DD9D46 /* UIViewControllerExtension.swift in Sources */,
@@ -315,14 +340,17 @@
 				D375AFD627D240F40027BC8F /* NotificationExtension.swift in Sources */,
 				D30E2ED827C952A900F033A5 /* FirebaseManager.swift in Sources */,
 				D3B22CF127C898BB00AE34C0 /* LoginViewModel.swift in Sources */,
+				D3B3A1AF27D63D9800616565 /* WeatherData.swift in Sources */,
 				D3F7715727D225BE00E1ECDA /* HomeViewModel.swift in Sources */,
 				D375AFD227D239F20027BC8F /* RegisterViewModel.swift in Sources */,
 				D33A26FB27CCAE9A00091C3F /* ProfileViewController.swift in Sources */,
+				D3B3A1B827D7391C00616565 /* ApiService.swift in Sources */,
 				D36DC25F27CE9F2200DD9D46 /* AppNavigationHandler.swift in Sources */,
 				D375AFD427D23A050027BC8F /* ProfileViewModel.swift in Sources */,
 				D36DC25C27CE989600DD9D46 /* Utilities.swift in Sources */,
 				D3C848CF27BF78390095C705 /* SceneDelegate.swift in Sources */,
-				D36DC24827CDDFD300DD9D46 /* UserData.swift in Sources */,
+				D3B3A1B327D724CC00616565 /* WeatherModel.swift in Sources */,
+				D36DC24827CDDFD300DD9D46 /* UserDataModel.swift in Sources */,
 				D36DC25027CE67F300DD9D46 /* StringExtension.swift in Sources */,
 				D3E7208727C4B50100A692C3 /* RegisterViewController.swift in Sources */,
 			);
