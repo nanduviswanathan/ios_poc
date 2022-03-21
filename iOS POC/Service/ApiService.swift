@@ -11,7 +11,6 @@ import Alamofire
 class ApiService {
     
     func fetchWeatherData(urlString: String, completion: @escaping (Bool, Data?) -> ()) {
-          
         AF.request(urlString, method: .get).responseJSON { response in
             
             guard let weatherData = response.data else {

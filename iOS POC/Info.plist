@@ -6,6 +6,12 @@
 	<string>Location is  used to track your position </string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location is  used to track your position </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The microphone listens for anonymous tokens from nearby devices.</string>
+	<key>NSNearbyInteractionUsageDescription</key>
+	<string>An anonymous token is advertised via Bluetooth to discover nearby devices.</string>
+	<key>Privacy - NSBluetoothPeripheralUsageDescription</key>
+	<string>An anonymous token is advertised via Bluetooth to discover nearby devices.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

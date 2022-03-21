@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MenuListController: UITableViewController {
-    var items = [Constants.SideMenuItems.homeMenu,Constants.SideMenuItems.profileMenu,Constants.SideMenuItems.weatherMenu,Constants.SideMenuItems.nearbyMenu,Constants.SideMenuItems.logoutMenu]
+    var items = [Constants.SideMenuItems.homeMenu,Constants.SideMenuItems.profileMenu,Constants.SideMenuItems.weatherMenu,Constants.SideMenuItems.logoutMenu]
     
     
     override func viewDidLoad() {
@@ -53,9 +53,6 @@ class MenuListController: UITableViewController {
             AppNavigationHandler.goToWeatherScreen(currentController: self)
             break
         case 3:
-            print("Nearby")
-            break
-        case 4:
             print("logout")
             showConfirmation()
             break

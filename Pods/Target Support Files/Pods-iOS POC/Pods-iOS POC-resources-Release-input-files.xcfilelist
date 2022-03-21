@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-iOS POC/Pods-iOS POC-resources.sh
+${PODS_ROOT}/NearbyMessages/Resources/resources/GNSSharedResources.bundle
+${PODS_ROOT}/NearbyMessages/Resources/resources/ic_expand_more.xcassets
+${PODS_ROOT}/NearbyMessages/Resources/resources/ic_nearby_48pt.xcassets

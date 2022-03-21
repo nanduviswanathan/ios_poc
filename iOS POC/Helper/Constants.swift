@@ -44,7 +44,6 @@ struct Constants {
         static let homeMenu = "Home"
         static let profileMenu = "Profile"
         static let weatherMenu = "Weather"
-        static let nearbyMenu = "NearBy"
         static let logoutMenu = "Logout"
         static let cellIdentifier = "menuCellItem"
     }
